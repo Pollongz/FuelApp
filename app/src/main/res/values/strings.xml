@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FuelApp</string>
+    <string name="add_a_new_car">Add a new car!</string>
+    <string name="no_data">No data</string>
+    <string name="fuelapp">FuelApp</string>
+    <string name="history_of_your_car_in_one_place">History of your car in one place!</string>
+    <string name="your_cars">Your cars:</string>
+    <string name="todo">TODO</string>
+</resources>

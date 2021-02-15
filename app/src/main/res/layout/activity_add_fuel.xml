@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddFuelActivity">
+
+    <EditText
+        android:id="@+id/newStationNameEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="24dp"
+        android:hint="Name of a gas station"
+        android:shadowColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/newFuelTypeEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/refuelDataTitle" />
+
+    <EditText
+        android:id="@+id/newFuelTypeEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="31dp"
+        android:hint="Type of a fuel"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/newFuelAmountEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newStationNameEt" />
+
+    <EditText
+        android:id="@+id/newFuelAmountEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="37dp"
+        android:hint="Fuel amount"
+        android:inputType="numberDecimal"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/newFuelCostEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newFuelTypeEt" />
+
+    <EditText
+        android:id="@+id/newFuelCostEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="31dp"
+        android:hint="Fuel cost"
+        android:inputType="numberDecimal"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/newMileageEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newFuelAmountEt" />
+
+    <EditText
+        android:id="@+id/newMileageEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="28dp"
+        android:hint="Mileage of fueled car"
+        android:inputType="number"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/newFuelDateEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newFuelCostEt" />
+
+    <EditText
+        android:id="@+id/newFuelDateEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="46dp"
+        android:hint="Date of refueling"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/addNewFuelBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newMileageEt" />
+
+    <Button
+        android:id="@+id/addNewFuelBtn"
+        android:layout_width="177dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="59dp"
+        android:text="Add a refuel"
+        app:cornerRadius="360dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newFuelDateEt" />
+
+    <TextView
+        android:id="@+id/refuelDataTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginBottom="33dp"
+        android:text="Complete refueling details"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/newStationNameEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
