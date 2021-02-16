@@ -87,24 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }
                 StringBuilder buffer = new StringBuilder();
                 while (cursor.moveToNext()) {
-                    switch (option) {
-                        case 0: buffer.append(cursor.getString(0));
-                        break;
-                        case 1: buffer.append(cursor.getString(1));
-                        break;
-                        case 2: buffer.append(cursor.getString(2));
-                        break;
-                        case 3: buffer.append(cursor.getString(3));
-                        break;
-                        case 4: buffer.append(cursor.getString(4));
-                        break;
-                        case 5: buffer.append(cursor.getString(5));
-                        break;
-                        case 6: buffer.append(cursor.getString(6));
-                        break;
-                        case 7: buffer.append(cursor.getString(7));
-                        break;
-                    }
+                    buffer.append(cursor.getString(option));
                 }
                 return buffer.toString();
             }

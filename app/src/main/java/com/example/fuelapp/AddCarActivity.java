@@ -68,7 +68,6 @@ public class AddCarActivity extends AppCompatActivity {
     }
 
     private void showDatePickerDialog(int id) {
-
         switch(id) {
             case 1:
                 DatePickerDialog inspectionDate = new DatePickerDialog(
