@@ -3,58 +3,116 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="12dp">
+    android:layout_height="50dp"
+    android:background="#FFFFFF">
 
     <TextView
-        android:id="@+id/fuelIdTv"
+        android:id="@+id/fuelAmountTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="ID"
-        android:textSize="40sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="right"
+        android:hint="45.47 L"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/verticalDivider6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/verticalDivider10"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="72dp"
+        android:background="#2C853B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/fuelCostTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:gravity="right"
+        android:hint="230.30 PLN"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/verticalDivider7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/verticalDivider6"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="148dp"
+        android:background="#2C853B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/fuelDateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="right"
+        android:hint="01-01-1970"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/verticalDivider7"
+        android:layout_width="2dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="244dp"
+        android:background="#2C853B"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/carBrandTv"
+        android:id="@+id/fuelTypeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:hint="Fuel amount"
-        android:textSize="20sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:hint="Benzyna"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/verticalDivider8"
+        android:layout_width="2dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="324dp"
+        android:background="#2C853B"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fuelIdTv"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/carModelTv"
+        android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:hint="Fuel cost"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carBrandTv"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:hint="123456"
+        app:layout_constraintEnd_toStartOf="@+id/verticalDivider8"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/carYearTv"
+    <View
+        android:id="@+id/horizontalDivider3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:hint="Date"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carModelTv"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/fueledCarTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="carsID"
+        android:layout_height="2dp"
+        android:background="#2C853B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carYearTv"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

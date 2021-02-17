@@ -80,8 +80,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         //Defining elements of a itemView
         public MyViewHolder(@NonNull View view) {
             super(view);
-            carBrandTv = view.findViewById(R.id.carBrandTv);
-            carModelTv = view.findViewById(R.id.carModelTv);
+            carBrandTv = view.findViewById(R.id.fuelAmountTv);
+            carModelTv = view.findViewById(R.id.fuelCostTv);
             carEngineTv = view.findViewById(R.id.carEngineTv);
             carHorseTv = view.findViewById(R.id.carHorseTv);
             carYearTv = view.findViewById(R.id.carYearTv);

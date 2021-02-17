@@ -56,14 +56,13 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerFuelAdapter.MyViewHolder holder, int position) {
 
-        String $fuelAmount = fuelAmounts.get(position) + "L";
-        String $fuelCost = fuelCosts.get(position) + "$";
+        String $fuelAmount = fuelAmounts.get(position) + " L";
+        String $fuelCost = fuelCosts.get(position) + " PLN";
 
-        holder.fuelIdTv.setText(String.valueOf(fuelIds.get(position)));
+        holder.fuelTypeTv.setText(String.valueOf(fuelTypes.get(position)));
         holder.fuelAmountTv.setText($fuelAmount);
         holder.fuelCostTv.setText($fuelCost);
         holder.fuelDateTv.setText(String.valueOf(fuelDates.get(position)));
-        holder.fueledCarTv.setText(String.valueOf(fueledCarIds.get(position)));
     }
 
     @Override
@@ -77,15 +76,15 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView fuelIdTv, fuelAmountTv, fuelCostTv, fuelDateTv, fueledCarTv;
+        private TextView fuelTypeTv, fuelAmountTv, fuelCostTv, fuelDateTv;
 
         public MyViewHolder(@NonNull View view) {
             super(view);
-            fuelIdTv = view.findViewById(R.id.fuelIdTv);
-            fuelAmountTv = view.findViewById(R.id.carBrandTv);
-            fuelCostTv = view.findViewById(R.id.carModelTv);
-            fuelDateTv = view.findViewById(R.id.carYearTv);
-            fueledCarTv = view.findViewById(R.id.fueledCarTv);
+
+            fuelTypeTv = view.findViewById(R.id.fuelTypeTv);
+            fuelAmountTv = view.findViewById(R.id.fuelAmountTv);
+            fuelCostTv = view.findViewById(R.id.fuelCostTv);
+            fuelDateTv = view.findViewById(R.id.fuelDateTv);
 
             view.setOnClickListener(this);
         }
