@@ -96,13 +96,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/mileageTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="8dp"
         android:hint="123456"
         app:layout_constraintEnd_toStartOf="@+id/verticalDivider8"
+        app:layout_constraintStart_toEndOf="@+id/verticalDivider7"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View

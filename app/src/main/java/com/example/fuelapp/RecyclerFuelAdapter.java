@@ -15,9 +15,6 @@ import static java.lang.Integer.parseInt;
 
 public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapter.MyViewHolder> {
 
-    public static final String COLUMN_CAR_ID = "_id";
-    public static final String COLUMN_FUELED_CAR_ID = "fueled_car_id";
-    public static final String VALUE = "value";
     private ArrayList<String> fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledCarIds;
     private Context context;
     public RecyclerViewClickListener listener;
@@ -62,6 +59,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
         holder.fuelTypeTv.setText(String.valueOf(fuelTypes.get(position)));
         holder.fuelAmountTv.setText($fuelAmount);
         holder.fuelCostTv.setText($fuelCost);
+        holder.mileageTv.setText(String.valueOf(mileages.get(position)));
         holder.fuelDateTv.setText(String.valueOf(fuelDates.get(position)));
     }
 
@@ -76,7 +74,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView fuelTypeTv, fuelAmountTv, fuelCostTv, fuelDateTv;
+        private TextView fuelTypeTv, fuelAmountTv, fuelCostTv, mileageTv, fuelDateTv;
 
         public MyViewHolder(@NonNull View view) {
             super(view);
@@ -84,6 +82,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
             fuelTypeTv = view.findViewById(R.id.fuelTypeTv);
             fuelAmountTv = view.findViewById(R.id.fuelAmountTv);
             fuelCostTv = view.findViewById(R.id.fuelCostTv);
+            mileageTv = view.findViewById(R.id.mileageTv);
             fuelDateTv = view.findViewById(R.id.fuelDateTv);
 
             view.setOnClickListener(this);

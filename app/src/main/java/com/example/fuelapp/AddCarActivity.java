@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +12,15 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 
-public class AddCarActivity extends AppCompatActivity {
+public class AddCarActivity extends AppCompatActivity implements View.OnClickListener {
 
-    DatePickerDialog.OnDateSetListener insurance_dateListener, inspection_dateListener;
+    final Calendar c = Calendar.getInstance();
+    private int mYear, mMonth, mDay;
     EditText newCarBrandEt, newCarModelEt, newCarHorseEt, newCarEngineEt, newCarYearEt;
     TextView newInspectionTv, newInsuranceTv;
     Button addNewCarBtn;
@@ -25,6 +29,11 @@ public class AddCarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car);
+
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        String currentDate = mDay + "." + mMonth + "." + mYear;
 
         newCarBrandEt = findViewById(R.id.newCarBrandEt);
         newCarModelEt = findViewById(R.id.newCarModelEt);
@@ -35,21 +44,10 @@ public class AddCarActivity extends AppCompatActivity {
         newCarYearEt = findViewById(R.id.newCarYearEt);
         addNewCarBtn = findViewById(R.id.addNewCarBtn);
 
-        newInspectionTv.setOnClickListener(v -> {
-           showDatePickerDialog(1);
-            inspection_dateListener = (view, year, month, dayOfMonth) -> {
-                String date = dayOfMonth + "-" + month + "-" + year;
-                newInspectionTv.setText(date);
-            };
-        });
-
-        newInsuranceTv.setOnClickListener(v -> {
-            showDatePickerDialog(2);
-            insurance_dateListener = (view, year, month, dayOfMonth) -> {
-                String date = dayOfMonth + "-" + month + "-" + year;
-                newInsuranceTv.setText(date);
-            };
-        });
+        newInspectionTv.setText(currentDate);
+        newInsuranceTv.setText(currentDate);
+        newInspectionTv.setOnClickListener(this);
+        newInsuranceTv.setOnClickListener(this);
 
         addNewCarBtn.setOnClickListener(v -> {
             DatabaseHelper myDB = new DatabaseHelper(AddCarActivity.this);
@@ -67,28 +65,25 @@ public class AddCarActivity extends AppCompatActivity {
         });
     }
 
-    private void showDatePickerDialog(int id) {
-        switch(id) {
-            case 1:
-                DatePickerDialog inspectionDate = new DatePickerDialog(
-                        this,
-                        inspection_dateListener,
-                        Calendar.getInstance().get(Calendar.YEAR),
-                        Calendar.getInstance().get(Calendar.MONTH),
-                        Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-                );
-                inspectionDate.show();
-                break;
-            case 2:
-                DatePickerDialog insuranceDate = new DatePickerDialog(
-                        this,
-                        insurance_dateListener,
-                        Calendar.getInstance().get(Calendar.YEAR),
-                        Calendar.getInstance().get(Calendar.MONTH),
-                        Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-                );
-                insuranceDate.show();
-                break;
+    @Override
+    public void onClick(View v) {
+        if (v == newInspectionTv) {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    (view, year, monthOfYear, dayOfMonth) -> {
+                        String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        newInspectionTv.setText(choosenDate);
+                    }, mYear, mMonth, mDay);
+
+            datePickerDialog.show();
+        } else if (v == newInsuranceTv) {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    (view, year, monthOfYear, dayOfMonth) -> {
+                        String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        newInsuranceTv.setText(choosenDate);
+                    }, mYear, mMonth, mDay);
+
+            datePickerDialog.show();
         }
     }
+
 }

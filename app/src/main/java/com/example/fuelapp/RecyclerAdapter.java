@@ -57,11 +57,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.carEngineTv.setText(String.valueOf(carEngines.get(position)));
         holder.carHorseTv.setText($carHorse);
         holder.carYearTv.setText(String.valueOf(carYears.get(position)));
-        Date date = new Date();
-
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        holder.dateTv.setText(formatter.format(date));
     }
 
     @Override
@@ -85,7 +80,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             carEngineTv = view.findViewById(R.id.carEngineTv);
             carHorseTv = view.findViewById(R.id.carHorseTv);
             carYearTv = view.findViewById(R.id.carYearTv);
-            dateTv = view.findViewById(R.id.dateTv);
 
             view.setOnClickListener(this);
         }
