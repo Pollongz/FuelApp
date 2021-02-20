@@ -146,27 +146,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-//    void addRepair(String repairTitle,
-//                   String repairDesc,
-//                   int repairCost,
-//                   String repairDate,
-//                   int repairedCarId
-//    ) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues cv = new ContentValues();
-//
-//        cv.put(COLUMN_REPAIR_TITLE, repairTitle);
-//        cv.put(COLUMN_REPAIR_DESCRIPTION, repairDesc);
-//        cv.put(COLUMN_REPAIR_COST, repairCost);
-//        cv.put(COLUMN_REPAIR_DATE, repairDate);
-//        cv.put(COLUMN_REPAIRED_CAR_ID, repairedCarId);
-//        long result = db.insert(TABLE_REPAIRS, null, cv);
-//        if (result == -1) {
-//            Toast.makeText(context, "Failed adding new repair.", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(context, "Added a new repair!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    void addRepair(String repairTitle,
+                   String repairDesc,
+                   int repairCost,
+                   String repairDate,
+                   int repairedCarId
+    ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_REPAIR_TITLE, repairTitle);
+        cv.put(COLUMN_REPAIR_DESCRIPTION, repairDesc);
+        cv.put(COLUMN_REPAIR_COST, repairCost);
+        cv.put(COLUMN_REPAIR_DATE, repairDate);
+        cv.put(COLUMN_REPAIRED_CAR_ID, repairedCarId);
+        long result = db.insert(TABLE_REPAIRS, null, cv);
+        if (result == -1) {
+            Toast.makeText(context, "Failed adding new repair.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Added a new repair!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
     @SuppressLint("Recycle")
@@ -184,6 +184,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @SuppressLint("Recycle")
     Cursor readAllFuels() {
         String query = "SELECT * FROM " + TABLE_FUELS;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    @SuppressLint("Recycle")
+    Cursor readAllRepairs() {
+        String query = "SELECT * FROM " + TABLE_REPAIRS;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
