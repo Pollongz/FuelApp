@@ -37,13 +37,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_FUEL_DATE = "fuel_date";
     private static final String COLUMN_FUELED_CAR_ID = "fueled_car_id";
 
-    private static final String TABLE_REPAIRS = "repairs";
-    private static final String COLUMN_REPAIR_ID = "repair_id";
-    private static final String COLUMN_REPAIR_TITLE = "repair_title";
-    private static final String COLUMN_REPAIR_DESCRIPTION = "repair_desc";
-    private static final String COLUMN_REPAIR_COST = "repair_cost";
-    private static final String COLUMN_REPAIR_DATE = "repair_date";
-    private static final String COLUMN_REPAIRED_CAR_ID = "repaired_car_id";
+    private static final String TABLE_SERVICES = "services";
+    private static final String COLUMN_SERVICE_ID = "service_id";
+    private static final String COLUMN_SERVICE_TITLE = "service_title";
+    private static final String COLUMN_SERVICE_DESCRIPTION = "service_desc";
+    private static final String COLUMN_SERVICE_COST = "service_cost";
+    private static final String COLUMN_SERVICE_DATE = "service_date";
+    private static final String COLUMN_SERVICED_CAR_ID = "serviced_car_id";
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -74,13 +74,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_FUEL_DATE + " TEXT, " +
                         COLUMN_FUELED_CAR_ID + " INTEGER REFERENCES "+ COLUMN_CAR_ID + ");";
         String query3 =
-                "CREATE TABLE " + TABLE_REPAIRS +
-                        " (" + COLUMN_REPAIR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_REPAIR_TITLE + " TEXT, " +
-                        COLUMN_REPAIR_DESCRIPTION + " TEXT, " +
-                        COLUMN_REPAIR_COST + " INTEGER, " +
-                        COLUMN_REPAIR_DATE + " TEXT, " +
-                        COLUMN_REPAIRED_CAR_ID + " INTEGER REFERENCES "+ COLUMN_CAR_ID + ");";
+                "CREATE TABLE " + TABLE_SERVICES +
+                        " (" + COLUMN_SERVICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_SERVICE_TITLE + " TEXT, " +
+                        COLUMN_SERVICE_DESCRIPTION + " TEXT, " +
+                        COLUMN_SERVICE_COST + " REAL, " +
+                        COLUMN_SERVICE_DATE + " TEXT, " +
+                        COLUMN_SERVICED_CAR_ID + " INTEGER REFERENCES "+ COLUMN_CAR_ID + ");";
         db.execSQL(query1);
         db.execSQL(query2);
         db.execSQL(query3);
@@ -90,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " +  TABLE_CARS);
         db.execSQL("DROP TABLE IF EXISTS " +  TABLE_FUELS);
-        db.execSQL("DROP TABLE IF EXISTS " +  TABLE_REPAIRS);
+        db.execSQL("DROP TABLE IF EXISTS " +  TABLE_SERVICES);
         onCreate(db);
     }
 
@@ -146,25 +146,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    void addRepair(String repairTitle,
-                   String repairDesc,
-                   int repairCost,
-                   String repairDate,
-                   int repairedCarId
+    void addServices(String serviceTitle,
+                   String serviceDesc,
+                   float serviceCost,
+                   String serviceDate,
+                   String servicedCarId
     ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_REPAIR_TITLE, repairTitle);
-        cv.put(COLUMN_REPAIR_DESCRIPTION, repairDesc);
-        cv.put(COLUMN_REPAIR_COST, repairCost);
-        cv.put(COLUMN_REPAIR_DATE, repairDate);
-        cv.put(COLUMN_REPAIRED_CAR_ID, repairedCarId);
-        long result = db.insert(TABLE_REPAIRS, null, cv);
+        cv.put(COLUMN_SERVICE_TITLE, serviceTitle);
+        cv.put(COLUMN_SERVICE_DESCRIPTION, serviceDesc);
+        cv.put(COLUMN_SERVICE_COST, serviceCost);
+        cv.put(COLUMN_SERVICE_DATE, serviceDate);
+        cv.put(COLUMN_SERVICED_CAR_ID, servicedCarId);
+        long result = db.insert(TABLE_SERVICES, null, cv);
         if (result == -1) {
-            Toast.makeText(context, "Failed adding new repair.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Failed adding new service.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Added a new repair!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Added a new service!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -194,8 +194,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Recycle")
-    Cursor readAllRepairs() {
-        String query = "SELECT * FROM " + TABLE_REPAIRS;
+    Cursor readAllServices() {
+        String query = "SELECT * FROM " + TABLE_SERVICES;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;

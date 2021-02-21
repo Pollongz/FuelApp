@@ -18,11 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String COLUMN_CAR_ID = "_id";
     private TextView myCarID, myCarBrand, myCarModel, myCarYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate;
-    private Button goToFuelList, deleteItem;
+    private Button goToFuelList, goToServiceList, deleteItem;
+    private String value;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         myInspectionDate = findViewById(R.id.myInspectionDate);
         myInsuranceDate = findViewById(R.id.myInsuranceDate);
         goToFuelList = findViewById(R.id.goToFuelList);
+        goToServiceList = findViewById(R.id.goToServiceList);
         deleteItem = findViewById(R.id.deleteItem);
 
         myCarID.setText(getCarsData(0));
@@ -49,29 +51,12 @@ public class ProfileActivity extends AppCompatActivity {
         myInsuranceDate.setText(getCarsData(6));
         myCarYear.setText(getCarsData(7));
 
+        goToFuelList.setOnClickListener(this);
+        goToServiceList.setOnClickListener(this);
+        deleteItem.setOnClickListener(this);
+
         Intent intent = getIntent();
-        String value = intent.getStringExtra(MainActivity.COLUMN_CAR_ID);
-
-        goToFuelList.setOnClickListener(v -> {
-            Intent intent1 = new Intent(getApplicationContext(), FuelActivity.class);
-            intent1.putExtra(COLUMN_CAR_ID, value);
-            startActivity(intent1);
-        });
-
-        deleteItem.setOnClickListener(v -> {
-            DatabaseHelper myDB = new DatabaseHelper(ProfileActivity.this);
-            new AlertDialog.Builder(ProfileActivity.this)
-                    .setTitle("Delete item")
-                    .setMessage("Are you sure you want to delete this item from the list?")
-                    .setPositiveButton(android.R.string.yes, (dialog, position) -> {
-                        myDB.deleteOneRow(value);
-                        Intent intent12 = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent12);
-                    })
-                    .setNegativeButton(android.R.string.no, null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-        });
+        value = intent.getStringExtra(MainActivity.COLUMN_CAR_ID);
     }
 
         @SuppressLint("Recycle")
@@ -93,6 +78,33 @@ public class ProfileActivity extends AppCompatActivity {
             }
             return null;
         }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == goToFuelList) {
+            Intent intent1 = new Intent(getApplicationContext(), FuelActivity.class);
+            intent1.putExtra(COLUMN_CAR_ID, value);
+            startActivity(intent1);
+        } else if (v == goToServiceList) {
+            Intent intent1 = new Intent(getApplicationContext(), ServiceActivity.class);
+            intent1.putExtra(COLUMN_CAR_ID, value);
+            startActivity(intent1);
+        } else if (v == deleteItem) {
+            DatabaseHelper myDB = new DatabaseHelper(ProfileActivity.this);
+            new AlertDialog.Builder(ProfileActivity.this)
+                    .setTitle("Delete item")
+                    .setMessage("Are you sure you want to delete this item from the list?")
+                    .setPositiveButton(android.R.string.yes, (dialog, position) -> {
+                        myDB.deleteOneRow(value);
+                        Intent intent12 = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent12);
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+    }
 }
 
 

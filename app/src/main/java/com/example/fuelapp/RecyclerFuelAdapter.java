@@ -53,12 +53,12 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerFuelAdapter.MyViewHolder holder, int position) {
 
-        String $fuelAmount = fuelAmounts.get(position) + " L";
-        String $fuelCost = fuelCosts.get(position) + " PLN";
+        String fuelAmount = fuelAmounts.get(position) + " L";
+        String fuelCost = fuelCosts.get(position) + " PLN";
 
         holder.fuelTypeTv.setText(String.valueOf(fuelTypes.get(position)));
-        holder.fuelAmountTv.setText($fuelAmount);
-        holder.fuelCostTv.setText($fuelCost);
+        holder.fuelAmountTv.setText(fuelAmount);
+        holder.fuelCostTv.setText(fuelCost);
         holder.mileageTv.setText(String.valueOf(mileages.get(position)));
         holder.fuelDateTv.setText(String.valueOf(fuelDates.get(position)));
     }
@@ -83,7 +83,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
             fuelAmountTv = view.findViewById(R.id.fuelAmountTv);
             fuelCostTv = view.findViewById(R.id.fuelCostTv);
             mileageTv = view.findViewById(R.id.mileageTv);
-            fuelDateTv = view.findViewById(R.id.fuelDateTv);
+            fuelDateTv = view.findViewById(R.id.serviceDateTv);
 
             view.setOnClickListener(this);
         }

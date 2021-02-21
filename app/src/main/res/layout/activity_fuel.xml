@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/goToAddFuelBtn"
+        android:id="@+id/goToAddServiceBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="17dp"
@@ -32,7 +32,7 @@
         app:rippleColor="#FFFFFF" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/TitleNdescriptionTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -124,7 +124,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/DateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -142,7 +142,7 @@
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="#2C853B"
-        app:layout_constraintBottom_toTopOf="@+id/fuelRecycler"
+        app:layout_constraintBottom_toTopOf="@+id/serviceRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />

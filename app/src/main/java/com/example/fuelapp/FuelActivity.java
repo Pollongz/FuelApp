@@ -4,11 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,7 +19,7 @@ public class FuelActivity extends AppCompatActivity {
     private DatabaseHelper myDB;
     private RecyclerFuelAdapter.RecyclerViewClickListener listener;
     private ArrayList<String> fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledCarIds;
-    private RecyclerView recyclerView;
+    private RecyclerView fuelRecycler;
     private RecyclerFuelAdapter RecyclerFuelAdapter;
     private Button goToAddFuelBtn;
 
@@ -31,8 +28,8 @@ public class FuelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fuel);
 
-        recyclerView = findViewById(R.id.fuelRecycler);
-        goToAddFuelBtn = findViewById(R.id.goToAddFuelBtn);
+        fuelRecycler = findViewById(R.id.fuelRecycler);
+        goToAddFuelBtn = findViewById(R.id.goToAddServiceBtn);
 
         goToAddFuelBtn.setOnClickListener(v -> {
             Intent intent1 = getIntent();
@@ -66,9 +63,9 @@ public class FuelActivity extends AppCompatActivity {
     private void createAdapter() {
         setOnClickListener();
         RecyclerFuelAdapter = new RecyclerFuelAdapter(FuelActivity.this, fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledCarIds,  listener);
-        recyclerView.setAdapter(RecyclerFuelAdapter);
+        fuelRecycler.setAdapter(RecyclerFuelAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(FuelActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
+        fuelRecycler.setLayoutManager(layoutManager);
     }
 
     private void setOnClickListener() {

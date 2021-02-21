@@ -45,25 +45,7 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
 
         newFuelDateTv.setText(currentDate);
         newFuelDateTv.setOnClickListener(this);
-
-        addNewFuelBtn.setOnClickListener(v -> {
-            Intent intent1 = getIntent();
-            String value = intent1.getStringExtra(ProfileActivity.COLUMN_CAR_ID);
-            DatabaseHelper myDB = new DatabaseHelper(AddFuelActivity.this);
-            myDB.addFuel(
-                    newStationNameEt.getText().toString().trim(),
-                    newFuelTypeEt.getText().toString().trim(),
-                    Float.parseFloat(newFuelAmountEt.getText().toString().trim()),
-                    Float.parseFloat(newFuelCostEt.getText().toString().trim()),
-                    Integer.parseInt(newMileageEt.getText().toString().trim()),
-                    newFuelDateTv.getText().toString().trim(),
-                    value
-            );
-
-            Intent intent2 = new Intent(this, FuelActivity.class);
-            intent2.putExtra(COLUMN_CAR_ID, value);
-            startActivity(intent2);
-        });
+        addNewFuelBtn.setOnClickListener(this);
     }
 
 
@@ -78,6 +60,25 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
                     }, mYear, mMonth, mDay);
 
             datePickerDialog.show();
+        } else if (v == addNewFuelBtn) {
+
+            Intent intent1 = getIntent();
+            String value = intent1.getStringExtra(ProfileActivity.COLUMN_CAR_ID);
+
+            DatabaseHelper myDB = new DatabaseHelper(AddFuelActivity.this);
+            myDB.addFuel(
+                    newStationNameEt.getText().toString().trim(),
+                    newFuelTypeEt.getText().toString().trim(),
+                    Float.parseFloat(newFuelAmountEt.getText().toString().trim()),
+                    Float.parseFloat(newFuelCostEt.getText().toString().trim()),
+                    Integer.parseInt(newMileageEt.getText().toString().trim()),
+                    newFuelDateTv.getText().toString().trim(),
+                    value
+            );
+
+            Intent intent2 = new Intent(this, FuelActivity.class);
+            intent2.putExtra(COLUMN_CAR_ID, value);
+            startActivity(intent2);
         }
     }
 }
