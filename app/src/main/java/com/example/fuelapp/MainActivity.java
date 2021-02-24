@@ -25,7 +25,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String COLUMN_CAR_ID = "_id";
     private DatabaseHelper myDB;
@@ -47,11 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.carRecycler);
         goToAddCarBtn = findViewById(R.id.goToAddCarBtn);
-
-        goToAddCarBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddCarActivity.class);
-            startActivity(intent);
-        });
+        goToAddCarBtn.setOnClickListener(this);
 
         myDB = new DatabaseHelper(MainActivity.this);
         carIds = new ArrayList<>();
@@ -102,5 +98,13 @@ public class MainActivity extends AppCompatActivity {
                     noDataTv.setVisibility(View.GONE);
                 }
             }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == goToAddCarBtn) {
+            Intent intent = new Intent(this, AddCarActivity.class);
+            startActivity(intent);
+        }
     }
 }
