@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCarActivity">
+    tools:context=".Activities.AddVehicleActivity">
 
     <Button
-        android:id="@+id/addNewCarBtn"
+        android:id="@+id/addNewVehicleBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="54dp"
-        android:text="@string/add_a_new_car"
+        android:text="@string/add_a_new_vehicle"
         app:backgroundTint="#2C853B"
         app:cornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,38 +20,38 @@
         app:rippleColor="#FFFFFF" />
 
     <EditText
-        android:id="@+id/newCarBrandEt"
+        android:id="@+id/newVehicleBrandEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Car brand"
+        android:hint="Vehicle brand"
         android:inputType="text"
         android:shadowColor="#2C853B"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCarTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/addVehicleTitle" />
 
     <EditText
-        android:id="@+id/newCarModelEt"
+        android:id="@+id/newVehicleModelEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Car model"
+        android:hint="Vehicle model"
         android:inputType="text"
         android:shadowColor="#2C853B"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newCarBrandEt"
-        app:layout_constraintTop_toBottomOf="@+id/newCarBrandEt" />
+        app:layout_constraintStart_toStartOf="@+id/newVehicleBrandEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleBrandEt" />
 
     <EditText
-        android:id="@+id/newCarEngineEt"
+        android:id="@+id/newVehicleEngineEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
@@ -61,11 +61,11 @@
         android:inputType="numberDecimal"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newCarModelEt"
-        app:layout_constraintTop_toBottomOf="@+id/newCarModelEt" />
+        app:layout_constraintStart_toStartOf="@+id/newVehicleModelEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleModelEt" />
 
     <EditText
-        android:id="@+id/newCarHorseEt"
+        android:id="@+id/newVehicleHorseEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
@@ -75,11 +75,11 @@
         android:inputType="number"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newCarEngineEt"
-        app:layout_constraintTop_toBottomOf="@+id/newCarEngineEt" />
+        app:layout_constraintStart_toStartOf="@+id/newVehicleEngineEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleEngineEt" />
 
     <EditText
-        android:id="@+id/newCarYearEt"
+        android:id="@+id/newVehicleYearEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
@@ -89,15 +89,15 @@
         android:inputType="number"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newCarHorseEt"
-        app:layout_constraintTop_toBottomOf="@+id/newCarHorseEt" />
+        app:layout_constraintStart_toStartOf="@+id/newVehicleHorseEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleHorseEt" />
 
     <TextView
-        android:id="@+id/addCarTitle"
+        android:id="@+id/addVehicleTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Complete Your cars details"
+        android:text="Complete Your vehicles details"
         android:textColor="#2C853B"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -113,7 +113,7 @@
         android:layout_marginTop="47dp"
         android:text="Inspection due date:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newCarYearEt" />
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleYearEt" />
 
     <TextView
         android:id="@+id/textView4"
@@ -136,7 +136,7 @@
         android:hint="01.01.1970"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newCarYearEt" />
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleYearEt" />
 
     <TextView
         android:id="@+id/newInsuranceTv"

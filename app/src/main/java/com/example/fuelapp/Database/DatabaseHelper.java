@@ -1,4 +1,4 @@
-package com.example.fuelapp;
+package com.example.fuelapp.Database;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -14,18 +14,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
 
-    private static final String DATABASE_NAME = "CarsList.db";
+    private static final String DATABASE_NAME = "VehiclesList.db";
     private static final int  DATABASE_VERSION = 1;
 
-    private static final String TABLE_CARS = "cars";
-    private static final String COLUMN_CAR_ID = "_id";
-    private static final String COLUMN_BRAND = "car_brand";
-    private static final String COLUMN_MODEL = "car_model";
-    private static final String COLUMN_HORSE_POWER = "car_horse_power";
-    private static final String COLUMN_ENGINE_CAPACITY = "car_engine_capacity";
-    private static final String COLUMN_INSPECTION_DATE = "car_inspection_date";
-    private static final String COLUMN_INSURANCE_DATE = "car_insurance_date";
-    private static final String COLUMN_YEAR_MADE = "car_year_made";
+    private static final String TABLE_VEHICLES = "vehicles";
+    private static final String COLUMN_VEHICLE_ID = "_id";
+    private static final String COLUMN_BRAND = "vehicle_brand";
+    private static final String COLUMN_MODEL = "vehicle_model";
+    private static final String COLUMN_HORSE_POWER = "vehicle_horse_power";
+    private static final String COLUMN_ENGINE_CAPACITY = "vehicle_engine_capacity";
+    private static final String COLUMN_INSPECTION_DATE = "vehicle_inspection_date";
+    private static final String COLUMN_INSURANCE_DATE = "vehicle_insurance_date";
+    private static final String COLUMN_YEAR_MADE = "vehicle_year_made";
 
     private static final String TABLE_FUELS = "fuels";
     private static final String COLUMN_FUEL_ID = "fuel_id";
@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_FUEL_COST = "fuel_cost";
     private static final String COLUMN_MILEAGE = "mileage";
     private static final String COLUMN_FUEL_DATE = "fuel_date";
-    private static final String COLUMN_FUELED_CAR_ID = "fueled_car_id";
+    private static final String COLUMN_FUELED_VEHICLE_ID = "fueled_vehicle_id";
 
     private static final String TABLE_SERVICES = "services";
     private static final String COLUMN_SERVICE_ID = "service_id";
@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_SERVICE_DESCRIPTION = "service_desc";
     private static final String COLUMN_SERVICE_COST = "service_cost";
     private static final String COLUMN_SERVICE_DATE = "service_date";
-    private static final String COLUMN_SERVICED_CAR_ID = "serviced_car_id";
+    private static final String COLUMN_SERVICED_VEHICLE_ID = "serviced_vehicle_id";
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -54,8 +54,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query1 =
-                "CREATE TABLE " + TABLE_CARS +
-                        " (" + COLUMN_CAR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "CREATE TABLE " + TABLE_VEHICLES +
+                        " (" + COLUMN_VEHICLE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_BRAND + " TEXT, " +
                         COLUMN_MODEL + " TEXT, " +
                         COLUMN_ENGINE_CAPACITY + " FLOAT, " +
@@ -72,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_FUEL_COST + " REAL, " +
                         COLUMN_MILEAGE + " INTEGER, " +
                         COLUMN_FUEL_DATE + " TEXT, " +
-                        COLUMN_FUELED_CAR_ID + " INTEGER REFERENCES "+ COLUMN_CAR_ID + ");";
+                        COLUMN_FUELED_VEHICLE_ID + " INTEGER REFERENCES "+ COLUMN_VEHICLE_ID + ");";
         String query3 =
                 "CREATE TABLE " + TABLE_SERVICES +
                         " (" + COLUMN_SERVICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -80,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_SERVICE_DESCRIPTION + " TEXT, " +
                         COLUMN_SERVICE_COST + " REAL, " +
                         COLUMN_SERVICE_DATE + " TEXT, " +
-                        COLUMN_SERVICED_CAR_ID + " INTEGER REFERENCES "+ COLUMN_CAR_ID + ");";
+                        COLUMN_SERVICED_VEHICLE_ID + " INTEGER REFERENCES "+ COLUMN_VEHICLE_ID + ");";
         db.execSQL(query1);
         db.execSQL(query2);
         db.execSQL(query3);
@@ -88,13 +88,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " +  TABLE_CARS);
+        db.execSQL("DROP TABLE IF EXISTS " +  TABLE_VEHICLES);
         db.execSQL("DROP TABLE IF EXISTS " +  TABLE_FUELS);
         db.execSQL("DROP TABLE IF EXISTS " +  TABLE_SERVICES);
         onCreate(db);
     }
 
-    void addCar(String brand,
+    public void addVehicle(String brand,
                 String model,
                 float engine,
                 int horsePower,
@@ -112,21 +112,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_INSPECTION_DATE, inspectionDate);
         cv.put(COLUMN_INSURANCE_DATE, insuranceDate);
         cv.put(COLUMN_YEAR_MADE, yearMade);
-        long result = db.insert(TABLE_CARS, null, cv);
+        long result = db.insert(TABLE_VEHICLES, null, cv);
         if (result == -1) {
-            Toast.makeText(context, "Failed adding new car.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Failed adding new vehicle.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Added a new car!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Added a new vehicle!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    void addFuel(String stationName,
+    public void addFuel(String stationName,
                  String fuelType,
                  float fuelAmount,
                  float fuelCost,
                  int mileage,
                  String fuelDate,
-                 String fueledCarId
+                 String fueledVehicleId
     ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -137,7 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_FUEL_COST, fuelCost);
         cv.put(COLUMN_MILEAGE, mileage);
         cv.put(COLUMN_FUEL_DATE, fuelDate);
-        cv.put(COLUMN_FUELED_CAR_ID, fueledCarId);
+        cv.put(COLUMN_FUELED_VEHICLE_ID, fueledVehicleId);
         long result = db.insert(TABLE_FUELS, null, cv);
         if (result == -1) {
             Toast.makeText(context, "Failed adding new refueling.", Toast.LENGTH_SHORT).show();
@@ -146,11 +146,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    void addServices(String serviceTitle,
+    public void addServices(String serviceTitle,
                    String serviceDesc,
                    float serviceCost,
                    String serviceDate,
-                   String servicedCarId
+                   String servicedVehicleId
     ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -159,7 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_SERVICE_DESCRIPTION, serviceDesc);
         cv.put(COLUMN_SERVICE_COST, serviceCost);
         cv.put(COLUMN_SERVICE_DATE, serviceDate);
-        cv.put(COLUMN_SERVICED_CAR_ID, servicedCarId);
+        cv.put(COLUMN_SERVICED_VEHICLE_ID, servicedVehicleId);
         long result = db.insert(TABLE_SERVICES, null, cv);
         if (result == -1) {
             Toast.makeText(context, "Failed adding new service.", Toast.LENGTH_SHORT).show();
@@ -170,8 +170,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     @SuppressLint("Recycle")
-    Cursor readAllCars() {
-        String query = "SELECT * FROM " + TABLE_CARS;
+    public Cursor readAllVehicles() {
+        String query = "SELECT * FROM " + TABLE_VEHICLES;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -182,7 +182,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Recycle")
-    Cursor readAllFuels() {
+    public Cursor readAllFuels() {
         String query = "SELECT * FROM " + TABLE_FUELS;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -194,7 +194,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Recycle")
-    Cursor readAllServices() {
+    public Cursor readAllServices() {
         String query = "SELECT * FROM " + TABLE_SERVICES;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -205,13 +205,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void deleteOneRow(String row_id) {
+    public void deleteOneRow(String row_id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        long result = db.delete(TABLE_CARS, "_id=?", new String[]{row_id});
+        long result = db.delete(TABLE_VEHICLES, "_id=?", new String[]{row_id});
         if (result == -1) {
-            Toast.makeText(context, "Failed deleting car.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Failed deleting vehicle.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Deleted a car!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Deleted a vehicle!", Toast.LENGTH_SHORT).show();
         }
     }
 }

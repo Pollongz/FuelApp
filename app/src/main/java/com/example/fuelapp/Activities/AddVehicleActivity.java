@@ -1,63 +1,61 @@
-package com.example.fuelapp;
+package com.example.fuelapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
-import java.text.DateFormat;
+import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.R;
+
 import java.util.Calendar;
 
-public class AddCarActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener {
 
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
-    EditText newCarBrandEt, newCarModelEt, newCarHorseEt, newCarEngineEt, newCarYearEt;
+    EditText newVehicleBrandEt, newVehicleModelEt, newVehicleHorseEt, newVehicleEngineEt, newVehicleYearEt;
     TextView newInspectionTv, newInsuranceTv;
-    Button addNewCarBtn;
+    Button addNewVehicleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_car);
+        setContentView(R.layout.activity_add_vehicle);
 
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
         String currentDate = mDay + "." + mMonth + "." + mYear;
 
-        newCarBrandEt = findViewById(R.id.newCarBrandEt);
-        newCarModelEt = findViewById(R.id.newCarModelEt);
-        newCarHorseEt = findViewById(R.id.newCarHorseEt);
-        newCarEngineEt = findViewById(R.id.newCarEngineEt);
+        newVehicleBrandEt = findViewById(R.id.newVehicleBrandEt);
+        newVehicleModelEt = findViewById(R.id.newVehicleModelEt);
+        newVehicleHorseEt = findViewById(R.id.newVehicleHorseEt);
+        newVehicleEngineEt = findViewById(R.id.newVehicleEngineEt);
         newInspectionTv = findViewById(R.id.newInspectionTv);
         newInsuranceTv = findViewById(R.id.newInsuranceTv);
-        newCarYearEt = findViewById(R.id.newCarYearEt);
-        addNewCarBtn = findViewById(R.id.addNewCarBtn);
+        newVehicleYearEt = findViewById(R.id.newVehicleYearEt);
+        addNewVehicleBtn = findViewById(R.id.addNewVehicleBtn);
 
         newInspectionTv.setText(currentDate);
         newInsuranceTv.setText(currentDate);
         newInspectionTv.setOnClickListener(this);
         newInsuranceTv.setOnClickListener(this);
 
-        addNewCarBtn.setOnClickListener(v -> {
-            DatabaseHelper myDB = new DatabaseHelper(AddCarActivity.this);
-            myDB.addCar(newCarBrandEt.getText().toString().trim(),
-                    newCarModelEt.getText().toString().trim(),
-                    Float.parseFloat(newCarEngineEt.getText().toString().trim()),
-                    Integer.parseInt(newCarHorseEt.getText().toString().trim()),
+        addNewVehicleBtn.setOnClickListener(v -> {
+            DatabaseHelper myDB = new DatabaseHelper(AddVehicleActivity.this);
+            myDB.addVehicle(newVehicleBrandEt.getText().toString().trim(),
+                    newVehicleModelEt.getText().toString().trim(),
+                    Float.parseFloat(newVehicleEngineEt.getText().toString().trim()),
+                    Integer.parseInt(newVehicleHorseEt.getText().toString().trim()),
                     newInspectionTv.getText().toString().trim(),
                     newInsuranceTv.getText().toString().trim(),
-                    Integer.parseInt(newCarYearEt.getText().toString().trim())
+                    Integer.parseInt(newVehicleYearEt.getText().toString().trim())
             );
 
             Intent intent = new Intent(this, MainActivity.class);

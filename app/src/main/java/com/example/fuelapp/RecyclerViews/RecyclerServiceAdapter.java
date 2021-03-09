@@ -1,4 +1,4 @@
-package com.example.fuelapp;
+package com.example.fuelapp.RecyclerViews;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,11 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fuelapp.R;
+
 import java.util.ArrayList;
 
 public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerServiceAdapter.MyViewHolder> {
 
-    private final ArrayList<String> serviceIds, serviceTitles, serviceDescriptions, serviceCosts, serviceDates, servicedCarIds;
+    private final ArrayList<String> serviceIds, serviceTitles, serviceDescriptions, serviceCosts, serviceDates, servicedVehicleIds;
     private Context context;
     public RecyclerViewClickListener listener;
 
@@ -23,7 +25,7 @@ public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerService
                                    ArrayList<String> serviceDescriptions,
                                    ArrayList<String> serviceCosts,
                                    ArrayList<String> serviceDates,
-                                   ArrayList<String> servicedCarIds,
+                                   ArrayList<String> servicedVehicleIds,
                                    RecyclerViewClickListener listener) {
         this.context = context;
         this.serviceIds = serviceIds;
@@ -31,7 +33,7 @@ public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerService
         this.serviceDescriptions = serviceDescriptions;
         this.serviceCosts = serviceCosts;
         this.serviceDates = serviceDates;
-        this.servicedCarIds = servicedCarIds;
+        this.servicedVehicleIds = servicedVehicleIds;
         this.listener = listener;
     }
 

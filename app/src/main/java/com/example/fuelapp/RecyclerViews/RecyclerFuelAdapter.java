@@ -1,4 +1,4 @@
-package com.example.fuelapp;
+package com.example.fuelapp.RecyclerViews;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,13 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fuelapp.R;
+
 import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
 public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapter.MyViewHolder> {
 
-    private ArrayList<String> fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledCarIds;
+    private ArrayList<String> fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
     private Context context;
     public RecyclerViewClickListener listener;
 
@@ -27,7 +29,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
                                ArrayList<String> fuelCosts,
                                ArrayList<String> mileages,
                                ArrayList<String> fuelDates,
-                               ArrayList<String> fueledCarIds,
+                               ArrayList<String> fueledVehicleIds,
                                RecyclerViewClickListener listener) {
         this.fuelIds = fuelIds;
         this.stationNames = stationNames;
@@ -36,7 +38,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
         this.fuelCosts = fuelCosts;
         this.mileages = mileages;
         this.fuelDates = fuelDates;
-        this.fueledCarIds = fueledCarIds;
+        this.fueledVehicleIds = fueledVehicleIds;
         this.context = context;
         this.listener = listener;
     }

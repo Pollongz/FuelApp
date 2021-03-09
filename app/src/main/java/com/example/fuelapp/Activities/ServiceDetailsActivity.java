@@ -1,4 +1,4 @@
-package com.example.fuelapp;
+package com.example.fuelapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,10 +12,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fuelapp.Activities.ProfileActivity;
+import com.example.fuelapp.Activities.ServiceActivity;
+import com.example.fuelapp.R;
+
 public class ServiceDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String COLUMN_CAR_ID = "_id";
-    public static final String COLUMN_SERVICED_CAR_ID = "serviced_car_id";
+    public static final String COLUMN_VEHICLE_ID = "_id";
+    public static final String COLUMN_SERVICED_VEHICLE_ID = "serviced_vehicle_id";
     private TextView thisServiceTitleTv, thisServiceDescTv, thisServiceDateTv, thisServiceCostTv;
     private String value;
 
@@ -37,17 +41,17 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
         thisServiceDateTv.setText(getServicesData(4));
 
         Intent intent = getIntent();
-        value = intent.getStringExtra(ProfileActivity.COLUMN_CAR_ID);
+        value = intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
     }
 
     @SuppressLint("Recycle")
     private String getServicesData(int option) {
-        SQLiteDatabase db = this.openOrCreateDatabase("CarsList.db", Context.MODE_PRIVATE, null);
+        SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null);
         Cursor cursor;
         if(db != null) {
             Intent intent = getIntent();
             value = intent.getStringExtra(ServiceActivity.COLUMN_SERVICE_ID);
-            cursor = db.rawQuery("SELECT service_id,service_title,service_desc,service_cost,service_date,serviced_car_id  FROM services WHERE service_id = " + value, null);
+            cursor = db.rawQuery("SELECT service_id,service_title,service_desc,service_cost,service_date,serviced_vehicle_id  FROM services WHERE service_id = " + value, null);
             if (cursor.getCount() == 0) {
                 Toast.makeText(getApplicationContext(), "no data", Toast.LENGTH_SHORT).show();
             }

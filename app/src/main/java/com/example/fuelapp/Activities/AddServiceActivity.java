@@ -1,4 +1,4 @@
-package com.example.fuelapp;
+package com.example.fuelapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,11 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.R;
+
 import java.util.Calendar;
 
 public class AddServiceActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String COLUMN_CAR_ID = "_id";
+    public static final String COLUMN_VEHICLE_ID = "_id";
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
     EditText newServiceTitleEt, newServiceDescEt, newServiceCostEt;
@@ -58,7 +61,7 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
         } else if (v == addNewServicebtn) {
 
             Intent intent1 = getIntent();
-            String value = intent1.getStringExtra(ProfileActivity.COLUMN_CAR_ID);
+            String value = intent1.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
 
             DatabaseHelper myDB = new DatabaseHelper(AddServiceActivity.this);
             myDB.addServices(
@@ -70,7 +73,7 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
             );
 
             Intent intent2 = new Intent(this, ServiceActivity.class);
-            intent2.putExtra(COLUMN_CAR_ID, value);
+            intent2.putExtra(COLUMN_VEHICLE_ID, value);
             startActivity(intent2);
         }
     }

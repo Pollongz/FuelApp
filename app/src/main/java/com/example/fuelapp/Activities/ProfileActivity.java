@@ -1,14 +1,12 @@
-package com.example.fuelapp;
+package com.example.fuelapp.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewOutlineProvider;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,12 +14,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.R;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String COLUMN_CAR_ID = "_id";
-    private TextView myCarID, myCarBrand, myCarModel, myCarYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate;
+    public static final String COLUMN_VEHICLE_ID = "_id";
+    private TextView myVehicleID, myVehicleBrand, myVehicleModel, myVehicleYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate;
     private Button goToFuelList, goToServiceList, deleteItem;
     private String value;
 
@@ -30,10 +29,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
 
-        myCarID = findViewById(R.id.myCarID);
-        myCarBrand = findViewById(R.id.myCarBrand);
-        myCarModel = findViewById(R.id.myCarModel);
-        myCarYear = findViewById(R.id.myCarYear);
+        myVehicleID = findViewById(R.id.myVehicleID);
+        myVehicleBrand = findViewById(R.id.myVehicleBrand);
+        myVehicleModel = findViewById(R.id.myVehicleModel);
+        myVehicleYear = findViewById(R.id.myVehicleYear);
         myEngineCapacity = findViewById(R.id.myEngineCapacity);
         myEnginePower = findViewById(R.id.myEnginePower);
         myInspectionDate = findViewById(R.id.myInspectionDate);
@@ -42,31 +41,31 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         goToServiceList = findViewById(R.id.goToServiceList);
         deleteItem = findViewById(R.id.deleteItem);
 
-        myCarID.setText(getCarsData(0));
-        myCarBrand.setText(getCarsData(1));
-        myCarModel.setText(getCarsData(2));
-        myEngineCapacity.setText(getCarsData(3));
-        myEnginePower.setText(getCarsData(4));
-        myInspectionDate.setText(getCarsData(5));
-        myInsuranceDate.setText(getCarsData(6));
-        myCarYear.setText(getCarsData(7));
+        myVehicleID.setText(getVehiclesData(0));
+        myVehicleBrand.setText(getVehiclesData(1));
+        myVehicleModel.setText(getVehiclesData(2));
+        myEngineCapacity.setText(getVehiclesData(3));
+        myEnginePower.setText(getVehiclesData(4));
+        myInspectionDate.setText(getVehiclesData(5));
+        myInsuranceDate.setText(getVehiclesData(6));
+        myVehicleYear.setText(getVehiclesData(7));
 
         goToFuelList.setOnClickListener(this);
         goToServiceList.setOnClickListener(this);
         deleteItem.setOnClickListener(this);
 
         Intent intent = getIntent();
-        value = intent.getStringExtra(MainActivity.COLUMN_CAR_ID);
+        value = intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
     }
 
         @SuppressLint("Recycle")
-        private String getCarsData(int option) {
-            SQLiteDatabase db = this.openOrCreateDatabase("CarsList.db", Context.MODE_PRIVATE, null);
+        private String getVehiclesData(int option) {
+            SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null);
             Cursor cursor;
             if(db != null) {
                 Intent intent = getIntent();
-                String value = intent.getStringExtra(MainActivity.COLUMN_CAR_ID);
-                cursor = db.rawQuery("SELECT _id,car_brand,car_model,car_engine_capacity,car_horse_power,car_inspection_date,car_insurance_date,car_year_made  FROM cars WHERE _id = " + value, null);
+                String value = intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
+                cursor = db.rawQuery("SELECT _id,vehicle_brand,vehicle_model,vehicle_engine_capacity,vehicle_horse_power,vehicle_inspection_date,vehicle_insurance_date,vehicle_year_made  FROM vehicles WHERE _id = " + value, null);
                 if (cursor.getCount() == 0) {
                     Toast.makeText(getApplicationContext(), "no data", Toast.LENGTH_SHORT).show();
                 }
@@ -84,11 +83,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if (v == goToFuelList) {
             Intent intent1 = new Intent(getApplicationContext(), FuelActivity.class);
-            intent1.putExtra(COLUMN_CAR_ID, value);
+            intent1.putExtra(COLUMN_VEHICLE_ID, value);
             startActivity(intent1);
         } else if (v == goToServiceList) {
             Intent intent1 = new Intent(getApplicationContext(), ServiceActivity.class);
-            intent1.putExtra(COLUMN_CAR_ID, value);
+            intent1.putExtra(COLUMN_VEHICLE_ID, value);
             startActivity(intent1);
         } else if (v == deleteItem) {
             DatabaseHelper myDB = new DatabaseHelper(ProfileActivity.this);

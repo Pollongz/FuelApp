@@ -1,24 +1,23 @@
-package com.example.fuelapp;
+package com.example.fuelapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.R;
+
 import java.util.Calendar;
 
 public class AddFuelActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String COLUMN_CAR_ID = "_id";
+    public static final String COLUMN_VEHICLE_ID = "_id";
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
     EditText newStationNameEt, newFuelTypeEt, newFuelAmountEt, newFuelCostEt, newMileageEt;
@@ -63,7 +62,7 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
         } else if (v == addNewFuelBtn) {
 
             Intent intent1 = getIntent();
-            String value = intent1.getStringExtra(ProfileActivity.COLUMN_CAR_ID);
+            String value = intent1.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
 
             DatabaseHelper myDB = new DatabaseHelper(AddFuelActivity.this);
             myDB.addFuel(
@@ -77,7 +76,7 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
             );
 
             Intent intent2 = new Intent(this, FuelActivity.class);
-            intent2.putExtra(COLUMN_CAR_ID, value);
+            intent2.putExtra(COLUMN_VEHICLE_ID, value);
             startActivity(intent2);
         }
     }

@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/carYearTv"
+        android:id="@+id/vehicleYearTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -40,10 +40,10 @@
         android:hint="Year"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carHorseTv" />
+        app:layout_constraintStart_toEndOf="@+id/vehicleHorseTv" />
 
     <TextView
-        android:id="@+id/carHorseTv"
+        android:id="@+id/vehicleHorseTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -51,10 +51,10 @@
         android:text="horsepwr"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carEngineTv" />
+        app:layout_constraintStart_toEndOf="@+id/vehicleEngineTv" />
 
     <TextView
-        android:id="@+id/carEngineTv"
+        android:id="@+id/vehicleEngineTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

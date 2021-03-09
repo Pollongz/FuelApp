@@ -1,4 +1,4 @@
-package com.example.fuelapp;
+package com.example.fuelapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,15 +10,19 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.R;
+import com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter;
+
 import java.util.ArrayList;
 
 public class FuelActivity extends AppCompatActivity {
 
 
-    public static final String COLUMN_CAR_ID = "_id";
+    public static final String COLUMN_VEHICLE_ID = "_id";
     private DatabaseHelper myDB;
-    private RecyclerFuelAdapter.RecyclerViewClickListener listener;
-    private ArrayList<String> fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledCarIds;
+    private com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter.RecyclerViewClickListener listener;
+    private ArrayList<String> fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
     private RecyclerView fuelRecycler;
     private RecyclerFuelAdapter RecyclerFuelAdapter;
     private Button goToAddFuelBtn;
@@ -33,9 +37,9 @@ public class FuelActivity extends AppCompatActivity {
 
         goToAddFuelBtn.setOnClickListener(v -> {
             Intent intent1 = getIntent();
-            String value = intent1.getStringExtra(ProfileActivity.COLUMN_CAR_ID);
+            String value = intent1.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
             Intent intent4 = new Intent(getApplicationContext(), AddFuelActivity.class);
-            intent4.putExtra(COLUMN_CAR_ID, value);
+            intent4.putExtra(COLUMN_VEHICLE_ID, value);
             startActivity(intent4);
         });
 
@@ -47,7 +51,7 @@ public class FuelActivity extends AppCompatActivity {
         fuelCosts = new ArrayList<>();
         mileages = new ArrayList<>();
         fuelDates = new ArrayList<>();
-        fueledCarIds = new ArrayList<>();
+        fueledVehicleIds = new ArrayList<>();
 
         storeFuelsInArrays();
         createAdapter();
@@ -62,7 +66,7 @@ public class FuelActivity extends AppCompatActivity {
 
     private void createAdapter() {
         setOnClickListener();
-        RecyclerFuelAdapter = new RecyclerFuelAdapter(FuelActivity.this, fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledCarIds,  listener);
+        RecyclerFuelAdapter = new RecyclerFuelAdapter(FuelActivity.this, fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds,  listener);
         fuelRecycler.setAdapter(RecyclerFuelAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(FuelActivity.this);
         fuelRecycler.setLayoutManager(layoutManager);
@@ -75,13 +79,13 @@ public class FuelActivity extends AppCompatActivity {
     private void storeFuelsInArrays() {
         Cursor cursor = myDB.readAllFuels();
         Intent intent1 = getIntent();
-        String checkedValue = intent1.getStringExtra(ProfileActivity.COLUMN_CAR_ID);
+        String checkedValue = intent1.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
 
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "No data to be displayed.", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
-                String value = cursor.getString(cursor.getColumnIndex("fueled_car_id"));
+                String value = cursor.getString(cursor.getColumnIndex("fueled_vehicle_id"));
                 if (value.equals(checkedValue)) {
                     fuelIds.add(cursor.getString(cursor.getColumnIndex("fuel_id")));
                     stationNames.add(cursor.getString(cursor.getColumnIndex("station_name")));
@@ -90,7 +94,7 @@ public class FuelActivity extends AppCompatActivity {
                     fuelCosts.add(cursor.getString(cursor.getColumnIndex("fuel_cost")));
                     mileages.add(cursor.getString(cursor.getColumnIndex("mileage")));
                     fuelDates.add(cursor.getString(cursor.getColumnIndex("fuel_date")));
-                    fueledCarIds.add(cursor.getString(cursor.getColumnIndex("fueled_car_id")));
+                    fueledVehicleIds.add(cursor.getString(cursor.getColumnIndex("fueled_vehicle_id")));
                 }
             }
         }
