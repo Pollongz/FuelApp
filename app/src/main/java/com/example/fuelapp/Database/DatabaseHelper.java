@@ -26,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_INSPECTION_DATE = "vehicle_inspection_date";
     private static final String COLUMN_INSURANCE_DATE = "vehicle_insurance_date";
     private static final String COLUMN_YEAR_MADE = "vehicle_year_made";
+    private static final String COLUMN_PLATE_NUMBER = "vehicle_plate_number";
 
     private static final String TABLE_FUELS = "fuels";
     private static final String COLUMN_FUEL_ID = "fuel_id";
@@ -62,7 +63,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         COLUMN_HORSE_POWER + " INTEGER, " +
                         COLUMN_INSPECTION_DATE + " TEXT, " +
                         COLUMN_INSURANCE_DATE + " TEXT, " +
-                        COLUMN_YEAR_MADE + " INTEGER);";
+                        COLUMN_YEAR_MADE + " INTEGER, " +
+                        COLUMN_PLATE_NUMBER + " TEXT);";
         String query2 =
                 "CREATE TABLE " + TABLE_FUELS +
                         " (" + COLUMN_FUEL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -100,7 +102,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int horsePower,
                 String inspectionDate,
                 String insuranceDate,
-                int yearMade
+                int yearMade,
+                String plateNumber
     ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -112,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_INSPECTION_DATE, inspectionDate);
         cv.put(COLUMN_INSURANCE_DATE, insuranceDate);
         cv.put(COLUMN_YEAR_MADE, yearMade);
+        cv.put(COLUMN_PLATE_NUMBER, plateNumber);
         long result = db.insert(TABLE_VEHICLES, null, cv);
         if (result == -1) {
             Toast.makeText(context, "Failed adding new vehicle.", Toast.LENGTH_SHORT).show();

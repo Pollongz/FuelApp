@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String COLUMN_VEHICLE_ID = "_id";
     private DatabaseHelper myDB;
     private com.example.fuelapp.RecyclerViews.RecyclerAdapter.RecyclerViewClickListener listener;
-    private ArrayList<String> vehicleIds, vehicleBrands, vehicleModels, vehicleHorses, vehicleEngines, vehicleYears;
+    private ArrayList<String> vehicleIds, vehicleBrands, vehicleModels, vehicleHorses, vehicleEngines, vehicleYears, plateNumbers;
     private TextView noDataTv;
     private ImageView noDataIv;
     private RecyclerView recyclerView;
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vehicleEngines = new ArrayList<>();
         vehicleHorses = new ArrayList<>();
         vehicleYears = new ArrayList<>();
+        plateNumbers = new ArrayList<>();
 
         storeVehiclesInArrays();
         createAdapter();
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void createAdapter() {
         setOnClickListener();
-        RecyclerAdapter = new RecyclerAdapter(MainActivity.this, vehicleIds, vehicleBrands, vehicleModels,  vehicleEngines, vehicleHorses, vehicleYears, listener);
+        RecyclerAdapter = new RecyclerAdapter(MainActivity.this, vehicleIds, vehicleBrands, vehicleModels,  vehicleEngines, vehicleHorses, vehicleYears, plateNumbers, listener);
         recyclerView.setAdapter(RecyclerAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     vehicleEngines.add(cursor.getString(3));
                     vehicleHorses.add(cursor.getString(4));
                     vehicleYears.add(cursor.getString(7));
+                    plateNumbers.add(cursor.getString(8));
 
                     noDataIv.setVisibility(View.GONE);
                     noDataTv.setVisibility(View.GONE);

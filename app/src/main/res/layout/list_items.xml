@@ -14,6 +14,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:hint="Brand"
+        android:textAllCaps="true"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,40 +27,20 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:hint="Model"
+        android:textAllCaps="true"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/fuelAmountTv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/vehicleYearTv"
+        android:id="@+id/plateNumberTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        android:hint="Year"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/vehicleHorseTv" />
-
-    <TextView
-        android:id="@+id/vehicleHorseTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="horsepwr"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/vehicleEngineTv" />
-
-    <TextView
-        android:id="@+id/vehicleEngineTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="engine"
+        android:hint="num-plate"
+        android:textAllCaps="true"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

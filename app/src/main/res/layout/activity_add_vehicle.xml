@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Activities.AddVehicleActivity">
 
+    <TextView
+        android:id="@+id/addVehicleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Complete Your vehicles details"
+        android:textColor="#2C853B"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/addNewVehicleBtn"
         android:layout_width="wrap_content"
@@ -29,6 +42,7 @@
         android:hint="Vehicle brand"
         android:inputType="text"
         android:shadowColor="#2C853B"
+        android:textAllCaps="true"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,12 +53,13 @@
         android:id="@+id/newVehicleModelEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Vehicle model"
         android:inputType="text"
         android:shadowColor="#2C853B"
+        android:textAllCaps="true"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintStart_toStartOf="@+id/newVehicleBrandEt"
@@ -54,11 +69,12 @@
         android:id="@+id/newVehicleEngineEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Engine capacity [L]"
         android:inputType="numberDecimal"
+        android:textAllCaps="false"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintStart_toStartOf="@+id/newVehicleModelEt"
@@ -68,7 +84,7 @@
         android:id="@+id/newVehicleHorseEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Engine power [HP]"
@@ -82,7 +98,7 @@
         android:id="@+id/newVehicleYearEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Manufacture year"
@@ -92,18 +108,20 @@
         app:layout_constraintStart_toStartOf="@+id/newVehicleHorseEt"
         app:layout_constraintTop_toBottomOf="@+id/newVehicleHorseEt" />
 
-    <TextView
-        android:id="@+id/addVehicleTitle"
+    <EditText
+        android:id="@+id/newPlateNumberEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Complete Your vehicles details"
-        android:textColor="#2C853B"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Plate number"
+        android:inputType="text"
+        android:textAllCaps="true"
+        android:textColorHighlight="#2C853B"
+        android:textColorLink="#2C853B"
+        app:layout_constraintStart_toStartOf="@+id/newVehicleYearEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleYearEt" />
 
     <TextView
         android:id="@+id/textView"
@@ -113,7 +131,7 @@
         android:layout_marginTop="47dp"
         android:text="Inspection due date:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newVehicleYearEt" />
+        app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt" />
 
     <TextView
         android:id="@+id/textView4"
@@ -136,7 +154,7 @@
         android:hint="01.01.1970"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newVehicleYearEt" />
+        app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt" />
 
     <TextView
         android:id="@+id/newInsuranceTv"

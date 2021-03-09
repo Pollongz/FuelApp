@@ -19,7 +19,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
 
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
-    EditText newVehicleBrandEt, newVehicleModelEt, newVehicleHorseEt, newVehicleEngineEt, newVehicleYearEt;
+    EditText newVehicleBrandEt, newVehicleModelEt, newVehicleHorseEt, newVehicleEngineEt, newVehicleYearEt, newPlateNumberEt;
     TextView newInspectionTv, newInsuranceTv;
     Button addNewVehicleBtn;
 
@@ -40,6 +40,7 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
         newInspectionTv = findViewById(R.id.newInspectionTv);
         newInsuranceTv = findViewById(R.id.newInsuranceTv);
         newVehicleYearEt = findViewById(R.id.newVehicleYearEt);
+        newPlateNumberEt = findViewById(R.id.newPlateNumberEt);
         addNewVehicleBtn = findViewById(R.id.addNewVehicleBtn);
 
         newInspectionTv.setText(currentDate);
@@ -55,7 +56,8 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                     Integer.parseInt(newVehicleHorseEt.getText().toString().trim()),
                     newInspectionTv.getText().toString().trim(),
                     newInsuranceTv.getText().toString().trim(),
-                    Integer.parseInt(newVehicleYearEt.getText().toString().trim())
+                    Integer.parseInt(newVehicleYearEt.getText().toString().trim()),
+                    newPlateNumberEt.getText().toString().trim()
             );
 
             Intent intent = new Intent(this, MainActivity.class);

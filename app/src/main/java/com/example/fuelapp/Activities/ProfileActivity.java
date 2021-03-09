@@ -20,7 +20,7 @@ import com.example.fuelapp.R;
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String COLUMN_VEHICLE_ID = "_id";
-    private TextView myVehicleID, myVehicleBrand, myVehicleModel, myVehicleYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate;
+    private TextView myVehicleID, myVehicleBrand, myVehicleModel, myVehicleYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate, myPlateNumber;
     private Button goToFuelList, goToServiceList, deleteItem;
     private String value;
 
@@ -37,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         myEnginePower = findViewById(R.id.myEnginePower);
         myInspectionDate = findViewById(R.id.myInspectionDate);
         myInsuranceDate = findViewById(R.id.myInsuranceDate);
+        myPlateNumber = findViewById(R.id.myPlateNumber);
         goToFuelList = findViewById(R.id.goToFuelList);
         goToServiceList = findViewById(R.id.goToServiceList);
         deleteItem = findViewById(R.id.deleteItem);
@@ -49,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         myInspectionDate.setText(getVehiclesData(5));
         myInsuranceDate.setText(getVehiclesData(6));
         myVehicleYear.setText(getVehiclesData(7));
+        myPlateNumber.setText(getVehiclesData(8));
 
         goToFuelList.setOnClickListener(this);
         goToServiceList.setOnClickListener(this);
@@ -65,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             if(db != null) {
                 Intent intent = getIntent();
                 String value = intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
-                cursor = db.rawQuery("SELECT _id,vehicle_brand,vehicle_model,vehicle_engine_capacity,vehicle_horse_power,vehicle_inspection_date,vehicle_insurance_date,vehicle_year_made  FROM vehicles WHERE _id = " + value, null);
+                cursor = db.rawQuery("SELECT _id,vehicle_brand,vehicle_model,vehicle_engine_capacity,vehicle_horse_power,vehicle_inspection_date,vehicle_insurance_date,vehicle_year_made, vehicle_plate_number  FROM vehicles WHERE _id = " + value, null);
                 if (cursor.getCount() == 0) {
                     Toast.makeText(getApplicationContext(), "no data", Toast.LENGTH_SHORT).show();
                 }
@@ -92,8 +94,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         } else if (v == deleteItem) {
             DatabaseHelper myDB = new DatabaseHelper(ProfileActivity.this);
             new AlertDialog.Builder(ProfileActivity.this)
-                    .setTitle("Delete item")
-                    .setMessage("Are you sure you want to delete this item from the list?")
+                    .setTitle("Delete vehicle")
+                    .setMessage("Are you sure you want to delete this vehicle from the list?")
                     .setPositiveButton(android.R.string.yes, (dialog, position) -> {
                         myDB.deleteOneRow(value);
                         Intent intent12 = new Intent(getApplicationContext(), MainActivity.class);

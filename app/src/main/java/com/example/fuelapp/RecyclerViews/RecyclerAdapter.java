@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
-    private ArrayList<String> vehicleIds, vehicleBrands, vehicleModels, vehicleHorses, vehicleEngines, vehicleYears;
+    private ArrayList<String> vehicleIds, vehicleBrands, vehicleModels, vehicleHorses, vehicleEngines, vehicleYears, plateNumbers;
     private Context context;
     private RecyclerViewClickListener listener;
 
@@ -26,6 +26,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                            ArrayList<String> vehicleEngines,
                            ArrayList<String> vehicleHorses,
                            ArrayList<String> vehicleYears,
+                           ArrayList<String> plateNumbers,
                            RecyclerViewClickListener listener) {
         this.vehicleIds = vehicleIds;
         this.vehicleBrands = vehicleBrands;
@@ -33,6 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         this.vehicleEngines = vehicleEngines;
         this.vehicleHorses = vehicleHorses;
         this.vehicleYears = vehicleYears;
+        this.plateNumbers = plateNumbers;
         this.context = context;
         this.listener = listener;
     }
@@ -53,9 +55,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         holder.vehicleBrandTv.setText(String.valueOf(vehicleBrands.get(position)));
         holder.vehicleModelTv.setText(String.valueOf(vehicleModels.get(position)));
-        holder.vehicleEngineTv.setText(String.valueOf(vehicleEngines.get(position)));
-        holder.vehicleHorseTv.setText($vehicleHorse);
-        holder.vehicleYearTv.setText(String.valueOf(vehicleYears.get(position)));
+        holder.plateNumberTv.setText(String.valueOf(plateNumbers.get(position)));
     }
 
     @Override
@@ -69,16 +69,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView vehicleBrandTv, vehicleModelTv, vehicleHorseTv, vehicleEngineTv, vehicleYearTv, dateTv;
+        private TextView vehicleBrandTv, vehicleModelTv, plateNumberTv;
 
         //Defining elements of a itemView
         public MyViewHolder(@NonNull View view) {
             super(view);
             vehicleBrandTv = view.findViewById(R.id.fuelAmountTv);
             vehicleModelTv = view.findViewById(R.id.fuelCostTv);
-            vehicleEngineTv = view.findViewById(R.id.vehicleEngineTv);
-            vehicleHorseTv = view.findViewById(R.id.vehicleHorseTv);
-            vehicleYearTv = view.findViewById(R.id.vehicleYearTv);
+            plateNumberTv = view.findViewById(R.id.plateNumberTv);
 
             view.setOnClickListener(this);
         }
