@@ -1,5 +1,6 @@
 package com.example.fuelapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,45 +8,43 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.fuelapp.Database.DatabaseHelper;
 import com.example.fuelapp.R;
 import com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class FuelActivity extends AppCompatActivity {
+public class FuelActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     public static final String COLUMN_VEHICLE_ID = "_id";
     private DatabaseHelper myDB;
     private com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter.RecyclerViewClickListener listener;
-    private ArrayList<String> fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
+    private ArrayList<String> fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
+    private ImageView emptyFuel, emptyView;
     private RecyclerView fuelRecycler;
     private RecyclerFuelAdapter RecyclerFuelAdapter;
-    private Button goToAddFuelBtn;
+    private FloatingActionButton goToAddFuelBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fuel);
 
+        emptyView = findViewById(R.id.emptyView);
+        emptyFuel = findViewById(R.id.emptyFuel);
         fuelRecycler = findViewById(R.id.fuelRecycler);
-        goToAddFuelBtn = findViewById(R.id.goToAddServiceBtn);
-
-        goToAddFuelBtn.setOnClickListener(v -> {
-            Intent intent1 = getIntent();
-            String value = intent1.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
-            Intent intent4 = new Intent(getApplicationContext(), AddFuelActivity.class);
-            intent4.putExtra(COLUMN_VEHICLE_ID, value);
-            startActivity(intent4);
-        });
+        goToAddFuelBtn = findViewById(R.id.goToAddFuelBtn);
+        goToAddFuelBtn.setOnClickListener(this);
 
         myDB = new DatabaseHelper(FuelActivity.this);
         fuelIds = new ArrayList<>();
-        stationNames = new ArrayList<>();
         fuelTypes = new ArrayList<>();
         fuelAmounts = new ArrayList<>();
         fuelCosts = new ArrayList<>();
@@ -59,36 +58,50 @@ public class FuelActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        getCarId();
         super.onBackPressed();
-        startActivity(new Intent(FuelActivity.this, MainActivity.class));
-        finish();
+        Intent passCarId = new Intent(getApplicationContext(), ProfileActivity.class);
+        passCarId.putExtra(COLUMN_VEHICLE_ID, getCarId());
+        startActivity(passCarId);
     }
 
     private void createAdapter() {
         setOnClickListener();
-        RecyclerFuelAdapter = new RecyclerFuelAdapter(FuelActivity.this, fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds,  listener);
+        RecyclerFuelAdapter = new RecyclerFuelAdapter(FuelActivity.this, fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds,  listener);
         fuelRecycler.setAdapter(RecyclerFuelAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(FuelActivity.this);
         fuelRecycler.setLayoutManager(layoutManager);
     }
 
     private void setOnClickListener() {
-        listener = (v, position) -> Toast.makeText(getApplicationContext(), "clicked on " + fuelIds.get(position), Toast.LENGTH_SHORT).show();
+        listener = (v, position) -> {
+            DatabaseHelper myDB = new DatabaseHelper(FuelActivity.this);
+            new AlertDialog.Builder(FuelActivity.this)
+                .setTitle("Delete fuelling")
+                .setMessage("Are you sure you want to delete this fuelling from the list?")
+                .setPositiveButton(android.R.string.yes, (dialog, wut) -> {
+                    myDB.deleteOneFuel(fuelIds.get(position));
+                    this.recreate();
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+        };
     }
 
     private void storeFuelsInArrays() {
         Cursor cursor = myDB.readAllFuels();
-        Intent intent1 = getIntent();
-        String checkedValue = intent1.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
 
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data to be displayed.", Toast.LENGTH_SHORT).show();
+            emptyView.setVisibility(View.VISIBLE);
+            emptyFuel.setVisibility(View.VISIBLE);
         } else {
+            emptyView.setVisibility(View.GONE);
+            emptyFuel.setVisibility(View.GONE);
             while (cursor.moveToNext()) {
-                String value = cursor.getString(cursor.getColumnIndex("fueled_vehicle_id"));
-                if (value.equals(checkedValue)) {
+                String fueledValue = cursor.getString(cursor.getColumnIndex("fueled_vehicle_id"));
+                if (fueledValue.equals(getCarId())) {
                     fuelIds.add(cursor.getString(cursor.getColumnIndex("fuel_id")));
-                    stationNames.add(cursor.getString(cursor.getColumnIndex("station_name")));
                     fuelTypes.add(cursor.getString(cursor.getColumnIndex("fuel_type")));
                     fuelAmounts.add(cursor.getString(cursor.getColumnIndex("fuel_amount")));
                     fuelCosts.add(cursor.getString(cursor.getColumnIndex("fuel_cost")));
@@ -98,5 +111,19 @@ public class FuelActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == goToAddFuelBtn) {
+            Intent passCarId = new Intent(getApplicationContext(), AddFuelActivity.class);
+            passCarId.putExtra(COLUMN_VEHICLE_ID, getCarId());
+            startActivity(passCarId);
+        }
+    }
+
+    private String getCarId() {
+        Intent intent = getIntent();
+        return intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
     }
 }

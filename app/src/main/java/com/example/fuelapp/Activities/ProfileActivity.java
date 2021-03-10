@@ -20,7 +20,7 @@ import com.example.fuelapp.R;
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String COLUMN_VEHICLE_ID = "_id";
-    private TextView myVehicleID, myVehicleBrand, myVehicleModel, myVehicleYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate, myPlateNumber;
+    private TextView myVehicleBrand, myVehicleModel, myVehicleYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate, myPlateNumber;
     private Button goToFuelList, goToServiceList, deleteItem;
     private String value;
 
@@ -29,7 +29,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
 
-        myVehicleID = findViewById(R.id.myVehicleID);
         myVehicleBrand = findViewById(R.id.myVehicleBrand);
         myVehicleModel = findViewById(R.id.myVehicleModel);
         myVehicleYear = findViewById(R.id.myVehicleYear);
@@ -42,7 +41,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         goToServiceList = findViewById(R.id.goToServiceList);
         deleteItem = findViewById(R.id.deleteItem);
 
-        myVehicleID.setText(getVehiclesData(0));
         myVehicleBrand.setText(getVehiclesData(1));
         myVehicleModel.setText(getVehiclesData(2));
         myEngineCapacity.setText(getVehiclesData(3));
@@ -94,16 +92,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         } else if (v == deleteItem) {
             DatabaseHelper myDB = new DatabaseHelper(ProfileActivity.this);
             new AlertDialog.Builder(ProfileActivity.this)
-                    .setTitle("Delete vehicle")
-                    .setMessage("Are you sure you want to delete this vehicle from the list?")
-                    .setPositiveButton(android.R.string.yes, (dialog, position) -> {
-                        myDB.deleteOneRow(value);
-                        Intent intent12 = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent12);
-                    })
-                    .setNegativeButton(android.R.string.no, null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+                .setTitle("Delete vehicle")
+                .setMessage("Are you sure you want to delete this vehicle from the list?")
+                .setPositiveButton(android.R.string.yes, (dialog, position) -> {
+                    myDB.deleteOneRow(value);
+                    Intent intent12 = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent12);
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
         }
     }
 }

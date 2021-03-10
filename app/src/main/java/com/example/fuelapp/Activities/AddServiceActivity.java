@@ -44,37 +44,35 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
         newServiceDateTv.setText(currentDate);
         newServiceDateTv.setOnClickListener(this);
         addNewServicebtn.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
-
         if (v == newServiceDateTv) {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    (view, year, monthOfYear, dayOfMonth) -> {
-                        String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                        newServiceDateTv.setText(choosenDate);
-                    }, mYear, mMonth, mDay);
-
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    newServiceDateTv.setText(choosenDate);
+                }, mYear, mMonth, mDay);
             datePickerDialog.show();
         } else if (v == addNewServicebtn) {
-
-            Intent intent1 = getIntent();
-            String value = intent1.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
-
             DatabaseHelper myDB = new DatabaseHelper(AddServiceActivity.this);
             myDB.addServices(
                     newServiceTitleEt.getText().toString().trim(),
                     newServiceDescEt.getText().toString().trim(),
                     Float.parseFloat(newServiceCostEt.getText().toString().trim()),
                     newServiceDateTv.getText().toString().trim(),
-                    value
+                    getCarId()
             );
 
             Intent intent2 = new Intent(this, ServiceActivity.class);
-            intent2.putExtra(COLUMN_VEHICLE_ID, value);
+            intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
             startActivity(intent2);
         }
+    }
+
+    private String getCarId() {
+        Intent intent = getIntent();
+        return intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
     }
 }

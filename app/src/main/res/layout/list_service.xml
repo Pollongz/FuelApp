@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/serviceDesctv"
-        android:layout_width="126dp"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="6dp"
@@ -27,6 +27,18 @@
         android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="110dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="6dp"
+        android:drawableEnd="@drawable/ic_dropdown"
+        android:gravity="right"
+        android:text="description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/verticalDivider11" />
 
     <View
         android:id="@+id/verticalDivider11"
@@ -81,18 +93,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="94dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="4dp"
-        android:drawableEnd="@drawable/ic_dropdown"
-        android:gravity="right"
-        android:text="full details"
-        app:layout_constraintEnd_toStartOf="@+id/verticalDivider11"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

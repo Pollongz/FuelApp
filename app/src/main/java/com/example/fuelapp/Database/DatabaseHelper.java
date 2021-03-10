@@ -30,7 +30,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_FUELS = "fuels";
     private static final String COLUMN_FUEL_ID = "fuel_id";
-    private static final String COLUMN_STATION_NAME = "station_name";
     private static final String COLUMN_FUEL_TYPE = "fuel_type";
     private static final String COLUMN_FUEL_AMOUNT = "fuel_amount";
     private static final String COLUMN_FUEL_COST = "fuel_cost";
@@ -68,7 +67,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query2 =
                 "CREATE TABLE " + TABLE_FUELS +
                         " (" + COLUMN_FUEL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_STATION_NAME + " TEXT, " +
                         COLUMN_FUEL_TYPE + " TEXT, " +
                         COLUMN_FUEL_AMOUNT + " REAL, " +
                         COLUMN_FUEL_COST + " REAL, " +
@@ -124,8 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void addFuel(String stationName,
-                 String fuelType,
+    public void addFuel(String fuelType,
                  float fuelAmount,
                  float fuelCost,
                  int mileage,
@@ -135,7 +132,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_STATION_NAME, stationName);
         cv.put(COLUMN_FUEL_TYPE, fuelType);
         cv.put(COLUMN_FUEL_AMOUNT, fuelAmount);
         cv.put(COLUMN_FUEL_COST, fuelCost);
@@ -218,4 +214,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Deleted a vehicle!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void deleteOneFuel(String fuel_id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long result = db.delete(TABLE_FUELS, "fuel_id=?", new String[]{fuel_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed deleting fuelling.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Deleted a fuelling!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

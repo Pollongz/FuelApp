@@ -18,10 +18,7 @@ import com.example.fuelapp.R;
 
 public class ServiceDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String COLUMN_VEHICLE_ID = "_id";
-    public static final String COLUMN_SERVICED_VEHICLE_ID = "serviced_vehicle_id";
     private TextView thisServiceTitleTv, thisServiceDescTv, thisServiceDateTv, thisServiceCostTv;
-    private String value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +31,10 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
         thisServiceCostTv = findViewById(R.id.thisServiceCostTv);
 
         String serviceCost = getServicesData(3) + " PLN";
-
         thisServiceTitleTv.setText(getServicesData(1));
         thisServiceDescTv.setText(getServicesData(2));
         thisServiceCostTv.setText(serviceCost);
         thisServiceDateTv.setText(getServicesData(4));
-
-        Intent intent = getIntent();
-        value = intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
     }
 
     @SuppressLint("Recycle")
@@ -49,9 +42,7 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
         SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null);
         Cursor cursor;
         if(db != null) {
-            Intent intent = getIntent();
-            value = intent.getStringExtra(ServiceActivity.COLUMN_SERVICE_ID);
-            cursor = db.rawQuery("SELECT service_id,service_title,service_desc,service_cost,service_date,serviced_vehicle_id  FROM services WHERE service_id = " + value, null);
+            cursor = db.rawQuery("SELECT service_id,service_title,service_desc,service_cost,service_date,serviced_vehicle_id  FROM services WHERE service_id = " + getServiceId(), null);
             if (cursor.getCount() == 0) {
                 Toast.makeText(getApplicationContext(), "no data", Toast.LENGTH_SHORT).show();
             }
@@ -66,6 +57,10 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
+    }
 
+    private String getServiceId() {
+        Intent intent = getIntent();
+        return intent.getStringExtra(ServiceActivity.COLUMN_SERVICE_ID);
     }
 }

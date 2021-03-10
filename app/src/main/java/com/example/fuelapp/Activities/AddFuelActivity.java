@@ -20,7 +20,7 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
     public static final String COLUMN_VEHICLE_ID = "_id";
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
-    EditText newStationNameEt, newFuelTypeEt, newFuelAmountEt, newFuelCostEt, newMileageEt;
+    EditText newFuelTypeEt, newFuelAmountEt, newFuelCostEt, newMileageEt;
     TextView newFuelDateTv;
     Button addNewFuelBtn;
 
@@ -34,7 +34,6 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
         mDay = c.get(Calendar.DAY_OF_MONTH);
         String currentDate = mDay + "." + mMonth + "." + mYear;
 
-        newStationNameEt = findViewById(R.id.newStationNameEt);
         newFuelTypeEt = findViewById(R.id.newFuelTypeEt);
         newFuelAmountEt = findViewById(R.id.newFuelAmountEt);
         newFuelCostEt = findViewById(R.id.newFuelCostEt);
@@ -47,37 +46,35 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
         addNewFuelBtn.setOnClickListener(this);
     }
 
-
     @Override
     public void onClick(View v) {
 
         if (v == newFuelDateTv) {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    (view, year, monthOfYear, dayOfMonth) -> {
-                        String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                        newFuelDateTv.setText(choosenDate);
-                    }, mYear, mMonth, mDay);
-
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    newFuelDateTv.setText(choosenDate);
+                }, mYear, mMonth, mDay);
             datePickerDialog.show();
         } else if (v == addNewFuelBtn) {
-
-            Intent intent1 = getIntent();
-            String value = intent1.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
-
             DatabaseHelper myDB = new DatabaseHelper(AddFuelActivity.this);
             myDB.addFuel(
-                    newStationNameEt.getText().toString().trim(),
-                    newFuelTypeEt.getText().toString().trim(),
-                    Float.parseFloat(newFuelAmountEt.getText().toString().trim()),
-                    Float.parseFloat(newFuelCostEt.getText().toString().trim()),
-                    Integer.parseInt(newMileageEt.getText().toString().trim()),
-                    newFuelDateTv.getText().toString().trim(),
-                    value
+                newFuelTypeEt.getText().toString().trim(),
+                Float.parseFloat(newFuelAmountEt.getText().toString().trim()),
+                Float.parseFloat(newFuelCostEt.getText().toString().trim()),
+                Integer.parseInt(newMileageEt.getText().toString().trim()),
+                newFuelDateTv.getText().toString().trim(),
+                getCarId()
             );
 
             Intent intent2 = new Intent(this, FuelActivity.class);
-            intent2.putExtra(COLUMN_VEHICLE_ID, value);
+            intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
             startActivity(intent2);
         }
+    }
+
+    private String getCarId() {
+        Intent intent = getIntent();
+        return intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
     }
 }

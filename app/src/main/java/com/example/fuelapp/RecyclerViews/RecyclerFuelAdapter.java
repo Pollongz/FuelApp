@@ -17,13 +17,12 @@ import static java.lang.Integer.parseInt;
 
 public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapter.MyViewHolder> {
 
-    private ArrayList<String> fuelIds, stationNames, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
+    private ArrayList<String> fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
     private Context context;
     public RecyclerViewClickListener listener;
 
     public RecyclerFuelAdapter(Context context,
                                ArrayList<String> fuelIds,
-                               ArrayList<String> stationNames,
                                ArrayList<String> fuelTypes,
                                ArrayList<String> fuelAmounts,
                                ArrayList<String> fuelCosts,
@@ -32,7 +31,6 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
                                ArrayList<String> fueledVehicleIds,
                                RecyclerViewClickListener listener) {
         this.fuelIds = fuelIds;
-        this.stationNames = stationNames;
         this.fuelTypes = fuelTypes;
         this.fuelAmounts = fuelAmounts;
         this.fuelCosts = fuelCosts;
@@ -46,7 +44,6 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
     @NonNull
     @Override
     public RecyclerFuelAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(context);
         View fuelView = inflater.inflate(R.layout.list_fuel, parent, false);
         return new MyViewHolder(fuelView);

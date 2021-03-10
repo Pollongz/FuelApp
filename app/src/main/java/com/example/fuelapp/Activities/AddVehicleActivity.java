@@ -69,21 +69,18 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if (v == newInspectionTv) {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    (view, year, monthOfYear, dayOfMonth) -> {
-                        String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                        newInspectionTv.setText(choosenDate);
-                    }, mYear, mMonth, mDay);
-
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    newInspectionTv.setText(choosenDate);
+                }, mYear, mMonth, mDay);
             datePickerDialog.show();
         } else if (v == newInsuranceTv) {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                    (view, year, monthOfYear, dayOfMonth) -> {
-                        String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                        newInsuranceTv.setText(choosenDate);
-                    }, mYear, mMonth, mDay);
-
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    newInsuranceTv.setText(choosenDate);
+                }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
     }
-
 }

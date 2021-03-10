@@ -1,6 +1,7 @@
 package com.example.fuelapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.fuelapp.Database.DatabaseHelper;
 import com.example.fuelapp.R;
 import com.example.fuelapp.RecyclerViews.RecyclerAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -25,19 +27,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseHelper myDB;
     private com.example.fuelapp.RecyclerViews.RecyclerAdapter.RecyclerViewClickListener listener;
     private ArrayList<String> vehicleIds, vehicleBrands, vehicleModels, vehicleHorses, vehicleEngines, vehicleYears, plateNumbers;
-    private TextView noDataTv;
-    private ImageView noDataIv;
+    private ImageView emptyVehicle, emptyView;
     private RecyclerView recyclerView;
     private RecyclerAdapter RecyclerAdapter;
-    private Button goToAddVehicleBtn;
+    private FloatingActionButton goToAddVehicleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        noDataTv = findViewById(R.id.noDataTv);
-        noDataIv = findViewById(R.id.noData_imageView);
+        emptyView = findViewById(R.id.emptyView);
+        emptyVehicle = findViewById(R.id.emptyVehicle);
 
         recyclerView = findViewById(R.id.vehicleRecycler);
         goToAddVehicleBtn = findViewById(R.id.goToAddVehicleBtn);
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         storeVehiclesInArrays();
         createAdapter();
-
     }
 
     private void createAdapter() {
@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setOnClickListener() {
         listener = (v, position) -> {
-            Toast.makeText(getApplicationContext(), "clicked on " + vehicleIds.get(position), Toast.LENGTH_SHORT).show();
             String value = vehicleIds.get(position);
             Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
             intent.putExtra(COLUMN_VEHICLE_ID, value);
@@ -77,23 +76,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void storeVehiclesInArrays() {
         Cursor cursor = myDB.readAllVehicles();
-            if (cursor.getCount() == 0) {
-                noDataIv.setVisibility(View.VISIBLE);
-                noDataTv.setVisibility(View.VISIBLE);
-            } else {
-                while (cursor.moveToNext()) {
-                    vehicleIds.add(cursor.getString(0));
-                    vehicleBrands.add(cursor.getString(1));
-                    vehicleModels.add(cursor.getString(2));
-                    vehicleEngines.add(cursor.getString(3));
-                    vehicleHorses.add(cursor.getString(4));
-                    vehicleYears.add(cursor.getString(7));
-                    plateNumbers.add(cursor.getString(8));
-
-                    noDataIv.setVisibility(View.GONE);
-                    noDataTv.setVisibility(View.GONE);
-                }
+        if (cursor.getCount() == 0) {
+            emptyView.setVisibility(View.VISIBLE);
+            emptyVehicle.setVisibility(View.VISIBLE);
+        } else {
+            emptyView.setVisibility(View.GONE);
+            emptyVehicle.setVisibility(View.GONE);
+            while (cursor.moveToNext()) {
+                vehicleIds.add(cursor.getString(0));
+                vehicleBrands.add(cursor.getString(1));
+                vehicleModels.add(cursor.getString(2));
+                vehicleEngines.add(cursor.getString(3));
+                vehicleHorses.add(cursor.getString(4));
+                vehicleYears.add(cursor.getString(7));
+                plateNumbers.add(cursor.getString(8));
             }
+        }
     }
 
     @Override

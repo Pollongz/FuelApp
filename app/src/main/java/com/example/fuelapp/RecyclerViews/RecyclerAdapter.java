@@ -50,9 +50,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     //ustalenie co znajduje się na etykiecie elementu
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
-
-        String $vehicleHorse = vehicleHorses.get(position) + " hp";
-
         holder.vehicleBrandTv.setText(String.valueOf(vehicleBrands.get(position)));
         holder.vehicleModelTv.setText(String.valueOf(vehicleModels.get(position)));
         holder.plateNumberTv.setText(String.valueOf(plateNumbers.get(position)));
