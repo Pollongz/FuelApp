@@ -3,12 +3,12 @@
     <style name="Theme.FuelApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/main_color</item>
-        <item name="colorPrimaryVariant">#002C853B</item>
+        <item name="colorPrimaryVariant">#FF2C853B</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/main_color</item>
         <item name="colorSecondaryVariant">@color/main_color</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

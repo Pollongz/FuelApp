@@ -73,6 +73,6 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
 
     private String getCarId() {
         Intent intent = getIntent();
-        return intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
+        return intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
     }
 }

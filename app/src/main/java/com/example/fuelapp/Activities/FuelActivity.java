@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.Fragments.ProfileFragment;
 import com.example.fuelapp.R;
 import com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,15 +57,6 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
         createAdapter();
     }
 
-    @Override
-    public void onBackPressed() {
-        getCarId();
-        super.onBackPressed();
-        Intent passCarId = new Intent(getApplicationContext(), ProfileActivity.class);
-        passCarId.putExtra(COLUMN_VEHICLE_ID, getCarId());
-        startActivity(passCarId);
-    }
-
     private void createAdapter() {
         setOnClickListener();
         RecyclerFuelAdapter = new RecyclerFuelAdapter(FuelActivity.this, fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds,  listener);
@@ -96,8 +88,6 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
             emptyView.setVisibility(View.VISIBLE);
             emptyFuel.setVisibility(View.VISIBLE);
         } else {
-            emptyView.setVisibility(View.GONE);
-            emptyFuel.setVisibility(View.GONE);
             while (cursor.moveToNext()) {
                 String fueledValue = cursor.getString(cursor.getColumnIndex("fueled_vehicle_id"));
                 if (fueledValue.equals(getCarId())) {
@@ -109,8 +99,18 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
                     fuelDates.add(cursor.getString(cursor.getColumnIndex("fuel_date")));
                     fueledVehicleIds.add(cursor.getString(cursor.getColumnIndex("fueled_vehicle_id")));
                 }
+                emptyView.setVisibility(View.GONE);
+                emptyFuel.setVisibility(View.GONE);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -122,8 +122,9 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //stara metoda przekazywania z profilu do listy id auta
     private String getCarId() {
         Intent intent = getIntent();
-        return intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
+        return intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
     }
 }

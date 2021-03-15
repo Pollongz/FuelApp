@@ -20,7 +20,7 @@
 
     <View
         android:id="@+id/verticalDivider10"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="0dp"
         android:layout_marginStart="72dp"
         android:background="#2C853B"
@@ -43,7 +43,7 @@
 
     <View
         android:id="@+id/verticalDivider6"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="0dp"
         android:layout_marginStart="148dp"
         android:background="#2C853B"
@@ -66,7 +66,7 @@
 
     <View
         android:id="@+id/verticalDivider7"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="50dp"
         android:layout_marginStart="244dp"
         android:background="#2C853B"
@@ -87,7 +87,7 @@
 
     <View
         android:id="@+id/verticalDivider8"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="50dp"
         android:layout_marginStart="324dp"
         android:background="#2C853B"
@@ -110,7 +110,7 @@
     <View
         android:id="@+id/horizontalDivider3"
         android:layout_width="wrap_content"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="#2C853B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

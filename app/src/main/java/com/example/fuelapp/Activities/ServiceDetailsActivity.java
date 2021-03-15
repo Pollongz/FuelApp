@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fuelapp.Activities.ProfileActivity;
-import com.example.fuelapp.Activities.ServiceActivity;
 import com.example.fuelapp.R;
 
 public class ServiceDetailsActivity extends AppCompatActivity implements View.OnClickListener {

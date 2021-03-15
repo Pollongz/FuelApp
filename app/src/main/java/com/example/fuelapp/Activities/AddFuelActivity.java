@@ -75,6 +75,6 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
 
     private String getCarId() {
         Intent intent = getIntent();
-        return intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
+        return intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
     }
 }

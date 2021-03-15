@@ -54,15 +54,6 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
         createAdapter();
     }
 
-    @Override
-    public void onBackPressed() {
-        getCarId();
-        super.onBackPressed();
-        Intent passCarId = new Intent(getApplicationContext(), ProfileActivity.class);
-        passCarId.putExtra(COLUMN_VEHICLE_ID, getCarId());
-        startActivity(passCarId);
-    }
-
     private void createAdapter() {
         setOnClickListener();
         RecyclerServiceAdapter = new RecyclerServiceAdapter(ServiceActivity.this, serviceIds, serviceTitles, serviceDescriptions, serviceCosts, serviceDates, servicedVehicleIds, listener);
@@ -86,8 +77,6 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
             emptyView.setVisibility(View.VISIBLE);
             emptyService.setVisibility(View.VISIBLE);
         } else {
-            emptyView.setVisibility(View.GONE);
-            emptyService.setVisibility(View.GONE);
             while (cursor.moveToNext()) {
                 String servicedValue = cursor.getString(cursor.getColumnIndex("serviced_vehicle_id"));
                 if (servicedValue.equals(getCarId())) {
@@ -98,8 +87,18 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
                     serviceDates.add(cursor.getString(cursor.getColumnIndex("service_date")));
                     servicedVehicleIds.add(cursor.getString(cursor.getColumnIndex("serviced_vehicle_id")));
                 }
+                emptyView.setVisibility(View.GONE);
+                emptyService.setVisibility(View.GONE);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -113,6 +112,6 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
 
     private String getCarId() {
         Intent intent = getIntent();
-        return intent.getStringExtra(ProfileActivity.COLUMN_VEHICLE_ID);
+        return intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
     }
 }
