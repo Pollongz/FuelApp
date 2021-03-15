@@ -225,4 +225,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void deleteOneService(String service_id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long result = db.delete(TABLE_SERVICES, "service_id=?", new String[]{service_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed deleting service.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Deleted a service!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

@@ -18,6 +18,7 @@ public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerService
     private final ArrayList<String> serviceIds, serviceTitles, serviceDescriptions, serviceCosts, serviceDates, servicedVehicleIds;
     private Context context;
     public RecyclerViewClickListener listener;
+    public RecyclerViewLongClickListener hListener;
 
     public RecyclerServiceAdapter (Context context,
                                    ArrayList<String> serviceIds,
@@ -26,7 +27,9 @@ public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerService
                                    ArrayList<String> serviceCosts,
                                    ArrayList<String> serviceDates,
                                    ArrayList<String> servicedVehicleIds,
-                                   RecyclerViewClickListener listener) {
+                                   RecyclerViewClickListener listener,
+                                   RecyclerViewLongClickListener hListener
+    ) {
         this.context = context;
         this.serviceIds = serviceIds;
         this.serviceTitles = serviceTitles;
@@ -35,6 +38,7 @@ public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerService
         this.serviceDates = serviceDates;
         this.servicedVehicleIds = servicedVehicleIds;
         this.listener = listener;
+        this.hListener = hListener;
     }
 
     @NonNull
@@ -55,7 +59,6 @@ public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerService
         holder.serviceDescTv.setText(String.valueOf(serviceDescriptions.get((position))));
         holder.serviceCostTv.setText($serviceCost);
         holder.serviceDateTv.setText(String.valueOf(serviceDates.get((position))));
-
     }
 
     @Override
@@ -67,7 +70,11 @@ public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerService
         void onClick(View v, int position);
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public interface RecyclerViewLongClickListener {
+        void onLongClick(View v, int position);
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         private final TextView serviceTitleTv, serviceDescTv, serviceCostTv, serviceDateTv;
 
@@ -80,6 +87,13 @@ public class RecyclerServiceAdapter extends RecyclerView.Adapter<RecyclerService
             serviceDateTv = view.findViewById(R.id.serviceDateTv);
 
             view.setOnClickListener(this);
+            view.setOnLongClickListener(this);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            hListener.onLongClick(v, getAdapterPosition());
+            return false;
         }
 
         @Override

@@ -31,10 +31,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public String value;
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String value) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();

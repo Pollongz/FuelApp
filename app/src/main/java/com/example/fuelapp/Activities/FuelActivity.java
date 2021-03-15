@@ -26,7 +26,7 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String COLUMN_VEHICLE_ID = "_id";
     private DatabaseHelper myDB;
-    private com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter.RecyclerViewClickListener listener;
+    private com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter.RecyclerViewLongClickListener hListener;
     private ArrayList<String> fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
     private ImageView emptyFuel, emptyView;
     private RecyclerView fuelRecycler;
@@ -58,15 +58,15 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void createAdapter() {
-        setOnClickListener();
-        RecyclerFuelAdapter = new RecyclerFuelAdapter(FuelActivity.this, fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds,  listener);
+        setOnLongClickListener();
+        RecyclerFuelAdapter = new RecyclerFuelAdapter(FuelActivity.this, fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds,  hListener);
         fuelRecycler.setAdapter(RecyclerFuelAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(FuelActivity.this);
         fuelRecycler.setLayoutManager(layoutManager);
     }
 
-    private void setOnClickListener() {
-        listener = (v, position) -> {
+    private void setOnLongClickListener() {
+        hListener = (v, position) -> {
             DatabaseHelper myDB = new DatabaseHelper(FuelActivity.this);
             new AlertDialog.Builder(FuelActivity.this)
                 .setTitle("Delete fuelling")
@@ -83,7 +83,6 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
 
     private void storeFuelsInArrays() {
         Cursor cursor = myDB.readAllFuels();
-
         if (cursor.getCount() == 0) {
             emptyView.setVisibility(View.VISIBLE);
             emptyFuel.setVisibility(View.VISIBLE);
@@ -122,7 +121,6 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //stara metoda przekazywania z profilu do listy id auta
     private String getCarId() {
         Intent intent = getIntent();
         return intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);

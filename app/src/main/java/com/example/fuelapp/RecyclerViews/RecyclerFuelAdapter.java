@@ -19,7 +19,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
 
     private ArrayList<String> fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
     private Context context;
-    public RecyclerViewClickListener listener;
+    public RecyclerViewLongClickListener hListener;
 
     public RecyclerFuelAdapter(Context context,
                                ArrayList<String> fuelIds,
@@ -29,7 +29,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
                                ArrayList<String> mileages,
                                ArrayList<String> fuelDates,
                                ArrayList<String> fueledVehicleIds,
-                               RecyclerViewClickListener listener) {
+                               RecyclerViewLongClickListener hListener) {
         this.fuelIds = fuelIds;
         this.fuelTypes = fuelTypes;
         this.fuelAmounts = fuelAmounts;
@@ -38,7 +38,7 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
         this.fuelDates = fuelDates;
         this.fueledVehicleIds = fueledVehicleIds;
         this.context = context;
-        this.listener = listener;
+        this.hListener = hListener;
     }
 
     @NonNull
@@ -67,11 +67,11 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
         return fuelIds.size();
     }
 
-    public interface RecyclerViewClickListener {
-        void onClick(View v, int position);
+    public interface RecyclerViewLongClickListener {
+        void onLongClick(View v, int position);
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         private TextView fuelTypeTv, fuelAmountTv, fuelCostTv, mileageTv, fuelDateTv;
 
@@ -84,12 +84,13 @@ public class RecyclerFuelAdapter extends RecyclerView.Adapter<RecyclerFuelAdapte
             mileageTv = view.findViewById(R.id.mileageTv);
             fuelDateTv = view.findViewById(R.id.serviceDateTv);
 
-            view.setOnClickListener(this);
+            view.setOnLongClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
-            listener.onClick(v, getAdapterPosition());
+        public boolean onLongClick(View v) {
+            hListener.onLongClick(v, getAdapterPosition());
+            return false;
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.fuelapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,14 +10,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fuelapp.Database.DatabaseHelper;
 import com.example.fuelapp.R;
 
 public class ServiceDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView thisServiceTitleTv, thisServiceDescTv, thisServiceDateTv, thisServiceCostTv;
+    private DatabaseHelper myDB;
+    private Button editService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,10 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
+        if (v == editService) {
+            //editing TODO
+            Toast.makeText(getApplicationContext(), "edited", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private String getServiceId() {

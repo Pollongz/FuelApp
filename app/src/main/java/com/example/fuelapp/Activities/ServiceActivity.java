@@ -1,5 +1,6 @@
 package com.example.fuelapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,7 +9,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,6 +25,7 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
     public static final String COLUMN_SERVICE_ID = "service_id";
     private DatabaseHelper myDB;
     private com.example.fuelapp.RecyclerViews.RecyclerServiceAdapter.RecyclerViewClickListener listener;
+    private com.example.fuelapp.RecyclerViews.RecyclerServiceAdapter.RecyclerViewLongClickListener hListener;
     private ImageView emptyService, emptyView;
     private RecyclerView serviceRecycler;
     private RecyclerServiceAdapter RecyclerServiceAdapter;
@@ -56,7 +57,8 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
 
     private void createAdapter() {
         setOnClickListener();
-        RecyclerServiceAdapter = new RecyclerServiceAdapter(ServiceActivity.this, serviceIds, serviceTitles, serviceDescriptions, serviceCosts, serviceDates, servicedVehicleIds, listener);
+        setOnLongClickListener();
+        RecyclerServiceAdapter = new RecyclerServiceAdapter(ServiceActivity.this, serviceIds, serviceTitles, serviceDescriptions, serviceCosts, serviceDates, servicedVehicleIds, listener, hListener);
         serviceRecycler.setAdapter(RecyclerServiceAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(ServiceActivity.this);
         serviceRecycler.setLayoutManager(layoutManager);
@@ -67,6 +69,22 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
             Intent passServiceId = new Intent(getApplicationContext(), ServiceDetailsActivity.class);
             passServiceId.putExtra(COLUMN_SERVICE_ID, serviceIds.get(position));
             startActivity(passServiceId);
+        };
+    }
+
+    private void setOnLongClickListener() {
+        hListener = (v, position) -> {
+            DatabaseHelper myDB = new DatabaseHelper(ServiceActivity.this);
+            new AlertDialog.Builder(ServiceActivity.this)
+                    .setTitle("Delete service")
+                    .setMessage("Are you sure you want to delete this service from the list?")
+                    .setPositiveButton(android.R.string.yes, (dialog, wut) -> {
+                        myDB.deleteOneService(serviceIds.get(position));
+                        this.recreate();
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         };
     }
 
