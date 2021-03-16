@@ -43,8 +43,16 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
         newInsuranceTv.setText(getCurrentDate());
         newInspectionTv.setOnClickListener(this);
         newInsuranceTv.setOnClickListener(this);
+        addNewVehicleBtn.setOnClickListener(this);
+    }
 
-        addNewVehicleBtn.setOnClickListener(v -> {
+    @Override
+    public void onClick(View v) {
+        if (v == newInspectionTv) {
+            chooseDate(newInspectionTv);
+        } else if (v == newInsuranceTv) {
+            chooseDate(newInsuranceTv);
+        } else if (v == addNewVehicleBtn) {
             DatabaseHelper myDB = new DatabaseHelper(AddVehicleActivity.this);
             myDB.addVehicle(newVehicleBrandEt.getText().toString().trim(),
                     newVehicleModelEt.getText().toString().trim(),
@@ -55,18 +63,8 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
                     Integer.parseInt(newVehicleYearEt.getText().toString().trim()),
                     newPlateNumberEt.getText().toString().trim()
             );
-
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        });
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == newInspectionTv) {
-            chooseDate(newInspectionTv);
-        } else if (v == newInsuranceTv) {
-            chooseDate(newInsuranceTv);
         }
     }
 
