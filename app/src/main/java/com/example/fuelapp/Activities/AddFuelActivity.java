@@ -20,19 +20,15 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
     public static final String COLUMN_VEHICLE_ID = "_id";
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
-    EditText newFuelTypeEt, newFuelAmountEt, newFuelCostEt, newMileageEt;
-    TextView newFuelDateTv;
-    Button addNewFuelBtn;
+    private String choosenDate;
+    private EditText newFuelTypeEt, newFuelAmountEt, newFuelCostEt, newMileageEt;
+    private TextView newFuelDateTv;
+    private Button addNewFuelBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_fuel);
-
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-        String currentDate = mDay + "." + mMonth + "." + mYear;
 
         newFuelTypeEt = findViewById(R.id.newFuelTypeEt);
         newFuelAmountEt = findViewById(R.id.newFuelAmountEt);
@@ -41,7 +37,7 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
         newFuelDateTv = findViewById(R.id.newFuelDateTv);
         addNewFuelBtn = findViewById(R.id.addNewFuelBtn);
 
-        newFuelDateTv.setText(currentDate);
+        newFuelDateTv.setText(getCurrentDate());
         newFuelDateTv.setOnClickListener(this);
         addNewFuelBtn.setOnClickListener(this);
     }
@@ -50,12 +46,7 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         if (v == newFuelDateTv) {
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year, monthOfYear, dayOfMonth) -> {
-                    String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                    newFuelDateTv.setText(choosenDate);
-                }, mYear, mMonth, mDay);
-            datePickerDialog.show();
+            chooseDate(newFuelDateTv);
         } else if (v == addNewFuelBtn) {
             DatabaseHelper myDB = new DatabaseHelper(AddFuelActivity.this);
             myDB.addFuel(
@@ -76,5 +67,38 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
     private String getCarId() {
         Intent intent = getIntent();
         return intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
+    }
+
+    public String getCurrentDate() {
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        if (mDay < 10 && mMonth < 10) {
+            return "0" + mDay + ".0" + (mMonth + 1) + "." + mYear;
+        } else if (mDay < 10) {
+            return "0" + mDay + "." + (mMonth + 1) + "." + mYear;
+        } else if (mMonth < 10) {
+            return mDay + ".0" + (mMonth + 1) + "." + mYear;
+        } else {
+            return mDay + "." + (mMonth + 1) + "." + mYear;
+        }
+    }
+
+    private void chooseDate(TextView option) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    if (dayOfMonth < 10 && monthOfYear < 9) {
+                        choosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                    } else if (dayOfMonth < 10) {
+                        choosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    } else if (monthOfYear < 9) {
+                        choosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                    } else {
+                        choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    }
+                    option.setText(choosenDate);
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 }

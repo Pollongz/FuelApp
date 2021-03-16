@@ -20,9 +20,10 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
     public static final String COLUMN_VEHICLE_ID = "_id";
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
-    EditText newServiceTitleEt, newServiceDescEt, newServiceCostEt;
-    TextView newServiceDateTv;
-    Button addNewServicebtn;
+    private String choosenDate;
+    private EditText newServiceTitleEt, newServiceDescEt, newServiceCostEt;
+    private TextView newServiceDateTv;
+    private Button addNewServicebtn;
 
 
     @Override
@@ -30,18 +31,13 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_service);
 
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-        String currentDate = mDay + "." + mMonth + "." + mYear;
-
         newServiceTitleEt = findViewById(R.id.newServiceTitleEt);
         newServiceCostEt = findViewById(R.id.newServiceCostEt);
         newServiceDescEt = findViewById(R.id.newServiceDescEt);
         newServiceDateTv = findViewById(R.id.newServiceDateTv);
         addNewServicebtn = findViewById(R.id.addNewServiceBtn);
 
-        newServiceDateTv.setText(currentDate);
+        newServiceDateTv.setText(getCurrentDate());
         newServiceDateTv.setOnClickListener(this);
         addNewServicebtn.setOnClickListener(this);
     }
@@ -49,12 +45,7 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if (v == newServiceDateTv) {
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year, monthOfYear, dayOfMonth) -> {
-                    String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                    newServiceDateTv.setText(choosenDate);
-                }, mYear, mMonth, mDay);
-            datePickerDialog.show();
+            chooseDate(newServiceDateTv);
         } else if (v == addNewServicebtn) {
             DatabaseHelper myDB = new DatabaseHelper(AddServiceActivity.this);
             myDB.addServices(
@@ -74,5 +65,38 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
     private String getCarId() {
         Intent intent = getIntent();
         return intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
+    }
+
+    public String getCurrentDate() {
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        if (mDay < 10 && mMonth < 10) {
+            return "0" + mDay + ".0" + (mMonth + 1) + "." + mYear;
+        } else if (mDay < 10) {
+            return "0" + mDay + "." + (mMonth + 1) + "." + mYear;
+        } else if (mMonth < 10) {
+            return mDay + ".0" + (mMonth + 1) + "." + mYear;
+        } else {
+            return mDay + "." + (mMonth + 1) + "." + mYear;
+        }
+    }
+
+    private void chooseDate(TextView option) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    if (dayOfMonth < 10 && monthOfYear < 9) {
+                        choosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                    } else if (dayOfMonth < 10) {
+                        choosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    } else if (monthOfYear < 9) {
+                        choosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                    } else {
+                        choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    }
+                    option.setText(choosenDate);
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 }

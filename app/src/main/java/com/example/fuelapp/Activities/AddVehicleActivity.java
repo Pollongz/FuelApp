@@ -19,19 +19,15 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
 
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
-    EditText newVehicleBrandEt, newVehicleModelEt, newVehicleHorseEt, newVehicleEngineEt, newVehicleYearEt, newPlateNumberEt;
-    TextView newInspectionTv, newInsuranceTv;
-    Button addNewVehicleBtn;
+    private String choosenDate;
+    private EditText newVehicleBrandEt, newVehicleModelEt, newVehicleHorseEt, newVehicleEngineEt, newVehicleYearEt, newPlateNumberEt;
+    private TextView newInspectionTv, newInsuranceTv;
+    private Button addNewVehicleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_vehicle);
-
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-        String currentDate = mDay + "." + mMonth + "." + mYear;
 
         newVehicleBrandEt = findViewById(R.id.newVehicleBrandEt);
         newVehicleModelEt = findViewById(R.id.newVehicleModelEt);
@@ -43,8 +39,8 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
         newPlateNumberEt = findViewById(R.id.newPlateNumberEt);
         addNewVehicleBtn = findViewById(R.id.addNewVehicleBtn);
 
-        newInspectionTv.setText(currentDate);
-        newInsuranceTv.setText(currentDate);
+        newInspectionTv.setText(getCurrentDate());
+        newInsuranceTv.setText(getCurrentDate());
         newInspectionTv.setOnClickListener(this);
         newInsuranceTv.setOnClickListener(this);
 
@@ -68,19 +64,42 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if (v == newInspectionTv) {
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year, monthOfYear, dayOfMonth) -> {
-                    String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                    newInspectionTv.setText(choosenDate);
-                }, mYear, mMonth, mDay);
-            datePickerDialog.show();
+            chooseDate(newInspectionTv);
         } else if (v == newInsuranceTv) {
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year, monthOfYear, dayOfMonth) -> {
-                    String choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                    newInsuranceTv.setText(choosenDate);
-                }, mYear, mMonth, mDay);
-            datePickerDialog.show();
+            chooseDate(newInsuranceTv);
         }
+    }
+
+    public String getCurrentDate() {
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        if (mDay < 10 && mMonth < 10) {
+            return "0" + mDay + ".0" + (mMonth + 1) + "." + mYear;
+        } else if (mDay < 10) {
+            return "0" + mDay + "." + (mMonth + 1) + "." + mYear;
+        } else if (mMonth < 10) {
+            return mDay + ".0" + (mMonth + 1) + "." + mYear;
+        } else {
+            return mDay + "." + (mMonth + 1) + "." + mYear;
+        }
+    }
+
+    private void chooseDate(TextView option) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    if (dayOfMonth < 10 && monthOfYear < 9) {
+                        choosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                    } else if (dayOfMonth < 10) {
+                        choosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    } else if (monthOfYear < 9) {
+                        choosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                    } else {
+                        choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    }
+                    option.setText(choosenDate);
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 }
