@@ -1,5 +1,6 @@
 package com.example.fuelapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -44,6 +45,22 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
         newInspectionTv.setOnClickListener(this);
         newInsuranceTv.setOnClickListener(this);
         addNewVehicleBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(AddVehicleActivity.this)
+                .setTitle("Discard changes")
+                .setMessage("Are you sure you want to discard all changes?")
+                .setPositiveButton(android.R.string.yes, (dialog, position) -> {
+                    super.onBackPressed();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     @Override

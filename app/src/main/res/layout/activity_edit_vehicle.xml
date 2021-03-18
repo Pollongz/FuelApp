@@ -241,4 +241,15 @@
         app:layout_constraintStart_toStartOf="@+id/editInspectionTv"
         app:layout_constraintTop_toBottomOf="@+id/editInspectionTv" />
 
+    <ImageView
+        android:id="@+id/imageCar3"
+        android:layout_width="150dp"
+        android:layout_height="300dp"
+        android:contentDescription="imageCar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/car_daro"
+        app:tint="#26151515"
+        app:tintMode="src_in" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

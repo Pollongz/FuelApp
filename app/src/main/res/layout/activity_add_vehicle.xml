@@ -127,9 +127,10 @@
         android:id="@+id/thisInspectionDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="41dp"
         android:text="Inspection due date:"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt" />
 
@@ -137,9 +138,10 @@
         android:id="@+id/thisInsuranceDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="41dp"
         android:text="Insurance due date:"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/thisInspectionDate" />
 
@@ -148,7 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginEnd="64dp"
         android:drawableEnd="@drawable/ic_dropdown"
         android:gravity="right"
         android:hint="01.01.1970"
@@ -167,5 +169,16 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/newInspectionTv"
         app:layout_constraintTop_toBottomOf="@+id/newInspectionTv" />
+
+    <ImageView
+        android:id="@+id/imageCar2"
+        android:layout_width="150dp"
+        android:layout_height="300dp"
+        android:contentDescription="imageCar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/car_daro"
+        app:tint="#26151515"
+        app:tintMode="src_in" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.fuelapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -44,7 +45,6 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-
         if (v == newFuelDateTv) {
             chooseDate(newFuelDateTv);
         } else if (v == addNewFuelBtn) {
@@ -57,7 +57,6 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
                 newFuelDateTv.getText().toString().trim(),
                 getCarId()
             );
-
             Intent intent2 = new Intent(this, FuelActivity.class);
             intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
             startActivity(intent2);
