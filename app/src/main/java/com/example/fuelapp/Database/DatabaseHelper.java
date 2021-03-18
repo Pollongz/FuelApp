@@ -205,9 +205,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void deleteOneRow(String row_id) {
+    public void deleteOneVehicle(String vehicle_id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        long result = db.delete(TABLE_VEHICLES, "_id=?", new String[]{row_id});
+        long result = db.delete(TABLE_VEHICLES, "_id=?", new String[]{vehicle_id});
         if (result == -1) {
             Toast.makeText(context, "Failed deleting vehicle.", Toast.LENGTH_SHORT).show();
         } else {
@@ -235,4 +235,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void editVehicle(String vehicle_id,
+                            String brand,
+                            String model,
+                            float engine,
+                            int horsePower,
+                            String inspectionDate,
+                            String insuranceDate,
+                            int yearMade,
+                            String plateNumber
+    ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_BRAND, brand);
+        cv.put(COLUMN_MODEL, model);
+        cv.put(COLUMN_ENGINE_CAPACITY, engine);
+        cv.put(COLUMN_HORSE_POWER, horsePower);
+        cv.put(COLUMN_INSPECTION_DATE, inspectionDate);
+        cv.put(COLUMN_INSURANCE_DATE, insuranceDate);
+        cv.put(COLUMN_YEAR_MADE, yearMade);
+        cv.put(COLUMN_PLATE_NUMBER, plateNumber);
+        long result = db.update(TABLE_VEHICLES, cv,"_id=?", new String[]{vehicle_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed updating vehicle.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Updated a vehicle!", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

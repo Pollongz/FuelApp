@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.fuelapp.Activities.EditVehicleActivity;
 import com.example.fuelapp.Activities.FuelActivity;
 import com.example.fuelapp.Activities.MainActivity;
 import com.example.fuelapp.Activities.ServiceActivity;
@@ -27,7 +28,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private static final String COLUMN_VEHICLE_ID = "_id";
     private TextView myVehicleBrand, myVehicleModel, myVehicleYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate, myPlateNumber;
-    private Button goToFuelList, goToServiceList, deleteItem;
+    private Button goToFuelList, goToServiceList, deleteItem, editVehicle;
     public String value;
 
     public ProfileFragment() {
@@ -67,6 +68,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         goToFuelList = view.findViewById(R.id.goToFuelList);
         goToServiceList = view.findViewById(R.id.goToServiceList);
         deleteItem = view.findViewById(R.id.deleteItem);
+        editVehicle = view.findViewById(R.id.editVehicle);
 
         myVehicleBrand.setText(getVehiclesData(1));
         myVehicleModel.setText(getVehiclesData(2));
@@ -80,6 +82,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         goToFuelList.setOnClickListener(this);
         goToServiceList.setOnClickListener(this);
         deleteItem.setOnClickListener(this);
+        editVehicle.setOnClickListener(this);
 
         return view;
     }
@@ -118,13 +121,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     .setTitle("Delete vehicle")
                     .setMessage("Are you sure you want to delete this vehicle from the list?")
                     .setPositiveButton(android.R.string.yes, (dialog, position) -> {
-                        myDB.deleteOneRow(value);
+                        myDB.deleteOneVehicle(value);
                         Intent intent12 = new Intent(getContext(), MainActivity.class);
                         startActivity(intent12);
                     })
                     .setNegativeButton(android.R.string.no, null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
+        } else if (v == editVehicle) {
+            Intent intent1 = new Intent(getContext(), EditVehicleActivity.class);
+            intent1.putExtra(COLUMN_VEHICLE_ID, value);
+            startActivity(intent1);
         }
     }
 }
