@@ -2,7 +2,6 @@ package com.example.fuelapp.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -15,10 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.fuelapp.Database.DatabaseHelper;
 import com.example.fuelapp.R;
-
 import java.util.Calendar;
 
 public class EditVehicleActivity extends AppCompatActivity implements View.OnClickListener {

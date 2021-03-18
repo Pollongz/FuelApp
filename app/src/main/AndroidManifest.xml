@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FuelApp">
-        <activity android:name=".Activities.EditVehicleActivity"></activity>
+        <activity android:name=".Activities.EditServiceActivity"></activity>
+        <activity android:name=".Activities.EditVehicleActivity" />
         <activity android:name=".Activities.ServiceDetailsActivity" />
         <activity android:name=".Activities.AddServiceActivity" />
         <activity android:name=".Activities.ServiceActivity" />

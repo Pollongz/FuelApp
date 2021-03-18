@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.AddServiceActivity">
+    tools:context=".Activities.EditServiceActivity">
 
     <TextView
         android:id="@+id/serviceDataTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Complete service details"
+        android:text="Edit service details"
         android:textColor="#2C853B"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/newServiceTitleEt"
+        android:id="@+id/editServiceTitleEt"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/serviceDataTitle" />
 
     <EditText
-        android:id="@+id/newServiceDescEt"
+        android:id="@+id/editServiceDescEt"
         android:layout_width="371dp"
         android:layout_height="320dp"
         android:layout_marginTop="200dp"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/newServiceCostEt"
+        android:id="@+id/editServiceCostEt"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
@@ -73,17 +73,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.668"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newServiceDescEt" />
+        app:layout_constraintTop_toBottomOf="@+id/editServiceDescEt" />
 
     <TextView
-        android:id="@+id/newServiceDateTv"
+        android:id="@+id/editServiceDateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="132dp"
         android:drawableEnd="@drawable/ic_dropdown"
         android:gravity="right"
-        android:hint="1.1.1970"
+        android:hint="01.01.1970"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -113,12 +113,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/addNewServiceBtn"
+        android:id="@+id/editServiceBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Add a service"
+        android:text="Save"
         app:backgroundTint="#2C853B"
         app:cornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -126,5 +126,15 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/imageService3"
+        android:layout_width="150dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/service_daro"
+        app:tint="#26151515"
+        app:tintMode="src_in" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

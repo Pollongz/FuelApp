@@ -168,7 +168,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-
     @SuppressLint("Recycle")
     public Cursor readAllVehicles() {
         String query = "SELECT * FROM " + TABLE_VEHICLES;
@@ -261,6 +260,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Failed updating vehicle.", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Updated a vehicle!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void editService(String service_id,
+                            String serviceTitle,
+                            String serviceDesc,
+                            float serviceCost,
+                            String serviceDate
+    ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_SERVICE_TITLE, serviceTitle);
+        cv.put(COLUMN_SERVICE_DESCRIPTION, serviceDesc);
+        cv.put(COLUMN_SERVICE_COST, serviceCost);
+        cv.put(COLUMN_SERVICE_DATE, serviceDate);
+        long result = db.update(TABLE_SERVICES, cv,"service_id=?", new String[]{service_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed updating service.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Updated a service!", Toast.LENGTH_SHORT).show();
         }
     }
 }
