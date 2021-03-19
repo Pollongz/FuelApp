@@ -61,7 +61,7 @@
     <string name="engine_capacity_l1">Engine capacity [L]:</string>
     <string name="description">description</string>
     <string-array name="fuel_type">
-        <item>Benzyna</item>
+        <item>Gasoline</item>
         <item>Diesel</item>
         <item>LPG</item>
     </string-array>
