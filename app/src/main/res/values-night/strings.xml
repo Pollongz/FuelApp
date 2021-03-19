@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">FuelApp</string>
     <string name="add_a_new_vehicle">Add a new vehicle!</string>
     <string name="no_data">No data</string>
     <string name="fuelapp">FuelApp</string>
@@ -7,4 +8,61 @@
     <string name="your_vehicles">Your vehicles:</string>
     <string name="todo">TODO</string>
     <string name="button">button</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="fuel_amount">Fuel amount</string>
+    <string name="fuel_cost">Fuel cost</string>
+    <string name="mileage_of_fueled_vehicle">Mileage of fueled vehicle</string>
+    <string name="add_a_refuel">Add a refuel</string>
+    <string name="complete_refueling_details">Complete refueling details</string>
+    <string name="refuel_date">Refuel date:</string>
+    <string name="fuel_type">Fuel type:</string>
+    <string name="complete_service_details">Complete service details</string>
+    <string name="add_a_description">Add a description…</string>
+    <string name="add_a_service">Add a service</string>
+    <string name="complete_your_vehicles_details">Complete Your vehicles details</string>
+    <string name="edit_service_details">Edit service details</string>
+    <string name="add_a_name_of_a_service">Add a name of a service</string>
+    <string name="_01_01_1970">01.01.1970</string>
+    <string name="service_date">Service date:</string>
+    <string name="service_cost">Service cost:</string>
+    <string name="edit_your_vehicles_details">Edit Your vehicles details</string>
+    <string name="save">Save</string>
+    <string name="brand">Brand:</string>
+    <string name="vehicle_brand">Vehicle brand</string>
+    <string name="model">Model:</string>
+    <string name="engine_capacity">Engine capacity:</string>
+    <string name="vehicle_model">Vehicle model</string>
+    <string name="engine_capacity_l">Engine capacity [L]</string>
+    <string name="engine_power">Engine Power [HP]:</string>
+    <string name="engine_power_hp">Engine power [HP]</string>
+    <string name="manufacture_year_t">Manufacture year:</string>
+    <string name="plate_number_t">Plate number:</string>
+    <string name="plate_number">Plate number</string>
+    <string name="imagecar">imageCar</string>
+    <string name="manufacture_year">Manufacture year</string>
+    <string name="type">Type</string>
+    <string name="amount">Amount</string>
+    <string name="mileage">Mileage</string>
+    <string name="title_and_description">Title and description</string>
+    <string name="cost">Cost</string>
+    <string name="date">Date</string>
+    <string name="description_here">description here..</string>
+    <string name="date2">Date:</string>
+    <string name="cost2">Cost:</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="services">Services</string>
+    <string name="refuellings">Refuellings</string>
+    <string name="engine_power_hp1">Engine power [HP]:</string>
+    <string name="inspection_due_date">Inspection due date:</string>
+    <string name="insurance_due_date">Insurance due date:</string>
+    <string name="manufacture_year1">Manufacture year:</string>
+    <string name="engine_capacity_l1">Engine capacity [L]:</string>
+    <string name="description">description</string>
+    <string-array name="fuel_type">
+        <item>Benzyna</item>
+        <item>Diesel</item>
+        <item>LPG</item>
+    </string-array>
 </resources>

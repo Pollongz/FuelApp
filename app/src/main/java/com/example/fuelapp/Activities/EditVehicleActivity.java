@@ -62,13 +62,13 @@ public class EditVehicleActivity extends AppCompatActivity implements View.OnCli
              new AlertDialog.Builder(EditVehicleActivity.this)
             .setTitle("Discard changes")
             .setMessage("Are you sure you want to discard all changes?")
-            .setPositiveButton(android.R.string.yes, (dialog, position) -> {
+            .setPositiveButton(R.string.yes, (dialog, position) -> {
                 super.onBackPressed();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
             })
-            .setNegativeButton(android.R.string.no, null)
+            .setNegativeButton(R.string.no, null)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show();
     }

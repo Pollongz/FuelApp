@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Edit Your vehicles details"
+        android:text="@string/edit_your_vehicles_details"
         android:textColor="#2C853B"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:text="Save"
+        android:text="@string/save"
         app:backgroundTint="#2C853B"
         app:cornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,12 +34,12 @@
         app:rippleColor="#FFFFFF" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/brandTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="76dp"
-        android:text="Brand:"
+        android:text="@string/brand"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleTitle" />
@@ -51,9 +51,12 @@
         android:layout_marginTop="70dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
-        android:gravity="right"
-        android:hint="Vehicle brand"
+        android:gravity="end"
+        android:hint="@string/vehicle_brand"
+        android:importantForAutofill="no"
         android:inputType="text"
+        android:maxLength="20"
+        android:maxLines="1"
         android:shadowColor="#2C853B"
         android:textAllCaps="true"
         android:textColorHighlight="#2C853B"
@@ -62,15 +65,15 @@
         app:layout_constraintTop_toBottomOf="@+id/editVehicleTitle" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/modelTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
-        android:text="Model:"
+        android:text="@string/model"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/brandTitle" />
 
     <EditText
         android:id="@+id/editVehicleModelEt"
@@ -79,9 +82,12 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
-        android:gravity="right"
-        android:hint="Vehicle model"
+        android:gravity="end"
+        android:hint="@string/vehicle_model"
+        android:importantForAutofill="no"
         android:inputType="text"
+        android:maxLength="20"
+        android:maxLines="1"
         android:shadowColor="#2C853B"
         android:textAllCaps="true"
         android:textColorHighlight="#2C853B"
@@ -90,15 +96,15 @@
         app:layout_constraintTop_toBottomOf="@+id/editVehicleBrandEt" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/eCapacityTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
-        android:text="Engine capacity:"
+        android:text="@string/engine_capacity"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/modelTitle" />
 
     <EditText
         android:id="@+id/editVehicleEngineEt"
@@ -107,9 +113,11 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
-        android:gravity="right"
-        android:hint="Engine capacity [L]"
+        android:gravity="end"
+        android:hint="@string/engine_capacity_l"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
+        android:maxLength="6"
         android:textAllCaps="false"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
@@ -117,15 +125,15 @@
         app:layout_constraintTop_toBottomOf="@+id/editVehicleModelEt" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/ePowerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
-        android:text="Engine Power [HP]:"
+        android:text="@string/engine_power"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/eCapacityTitle" />
 
     <EditText
         android:id="@+id/editVehicleHorseEt"
@@ -134,24 +142,26 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
-        android:gravity="right"
-        android:hint="Engine power [HP]"
+        android:gravity="end"
+        android:hint="@string/engine_power_hp"
+        android:importantForAutofill="no"
         android:inputType="number"
+        android:maxLength="6"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleEngineEt" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/mYearTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
-        android:text="Manufacture year:"
+        android:text="@string/manufacture_year_t"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/ePowerTitle" />
 
     <EditText
         android:id="@+id/editVehicleYearEt"
@@ -160,24 +170,26 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
-        android:gravity="right"
-        android:hint="Manufacture year"
+        android:gravity="end"
+        android:hint="@string/manufacture_year"
+        android:importantForAutofill="no"
         android:inputType="number"
+        android:maxLength="4"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleHorseEt" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/pNumberTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
-        android:text="Plate number:"
+        android:text="@string/plate_number_t"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/mYearTitle" />
 
     <EditText
         android:id="@+id/editPlateNumberEt"
@@ -186,13 +198,17 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
-        android:gravity="right"
-        android:hint="Plate number"
+        android:gravity="end"
+        android:hint="@string/plate_number"
+        android:importantForAutofill="no"
         android:inputType="text"
+        android:maxLength="15"
+        android:maxLines="1"
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editVehicleYearEt" />
+        app:layout_constraintTop_toBottomOf="@+id/editVehicleYearEt"
+        tools:ignore="TextFields" />
 
     <TextView
         android:id="@+id/thisInspectionDate"
@@ -200,10 +216,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
-        android:text="Inspection due date:"
+        android:text="@string/inspection_due_date"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/pNumberTitle" />
 
     <TextView
         android:id="@+id/thisInsuranceDate"
@@ -211,7 +227,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
-        android:text="Insurance due date:"
+        android:text="@string/insurance_due_date"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/thisInspectionDate" />
@@ -222,10 +238,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="36dp"
-        android:drawableEnd="@drawable/ic_dropdown"
-        android:gravity="right"
-        android:hint="01.01.1970"
+        android:gravity="end"
         android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPlateNumberEt" />
 
@@ -234,10 +249,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:drawableEnd="@drawable/ic_dropdown"
-        android:gravity="right"
-        android:hint="01.01.1970"
+        android:gravity="end"
         android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_dropdown"
         app:layout_constraintStart_toStartOf="@+id/editInspectionTv"
         app:layout_constraintTop_toBottomOf="@+id/editInspectionTv" />
 
@@ -245,7 +259,7 @@
         android:id="@+id/imageCar3"
         android:layout_width="150dp"
         android:layout_height="300dp"
-        android:contentDescription="imageCar"
+        android:contentDescription="@string/imagecar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/car_daro"

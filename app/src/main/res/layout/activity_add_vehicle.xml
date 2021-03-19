@@ -11,13 +11,165 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Complete Your vehicles details"
+        android:text="@string/complete_your_vehicles_details"
         android:textColor="#2C853B"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/newVehicleBrandEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/vehicle_brand"
+        android:inputType="text"
+        android:maxLength="20"
+        android:shadowColor="#2C853B"
+        android:textAllCaps="true"
+        android:textColorHighlight="#2C853B"
+        android:textColorLink="#2C853B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addVehicleTitle"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/newVehicleModelEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/vehicle_model"
+        android:inputType="text"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:shadowColor="#2C853B"
+        android:textAllCaps="true"
+        android:textColorHighlight="#2C853B"
+        android:textColorLink="#2C853B"
+        app:layout_constraintStart_toStartOf="@+id/newVehicleBrandEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleBrandEt"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/newVehicleEngineEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/engine_capacity_l"
+        android:inputType="numberDecimal"
+        android:maxLength="6"
+        android:maxLines="1"
+        android:textAllCaps="false"
+        android:textColorHighlight="#2C853B"
+        android:textColorLink="#2C853B"
+        app:layout_constraintStart_toStartOf="@+id/newVehicleModelEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleModelEt"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/newVehicleHorseEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/engine_power_hp"
+        android:inputType="number"
+        android:maxLength="6"
+        android:textColorHighlight="#2C853B"
+        android:textColorLink="#2C853B"
+        app:layout_constraintStart_toStartOf="@+id/newVehicleEngineEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleEngineEt"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/newVehicleYearEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/manufacture_year"
+        android:inputType="number"
+        android:maxLength="4"
+        android:maxLines="1"
+        android:textColorHighlight="#2C853B"
+        android:textColorLink="#2C853B"
+        app:layout_constraintStart_toStartOf="@+id/newVehicleHorseEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleHorseEt"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/newPlateNumberEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/plate_number"
+        android:inputType="text"
+        android:maxLength="15"
+        android:textAllCaps="true"
+        android:textColorHighlight="#2C853B"
+        android:textColorLink="#2C853B"
+        app:layout_constraintStart_toStartOf="@+id/newVehicleYearEt"
+        app:layout_constraintTop_toBottomOf="@+id/newVehicleYearEt"
+        android:importantForAutofill="no"
+        tools:ignore="TextFields" />
+
+    <TextView
+        android:id="@+id/thisInspectionDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="41dp"
+        android:text="@string/inspection_due_date"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt" />
+
+    <TextView
+        android:id="@+id/thisInsuranceDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="41dp"
+        android:text="@string/insurance_due_date"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thisInspectionDate" />
+
+    <TextView
+        android:id="@+id/newInspectionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="64dp"
+        android:gravity="end"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt"
+        app:drawableEndCompat="@drawable/ic_dropdown" />
+
+    <TextView
+        android:id="@+id/newInsuranceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="end"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/newInspectionTv"
+        app:layout_constraintTop_toBottomOf="@+id/newInspectionTv"
+        app:drawableEndCompat="@drawable/ic_dropdown" />
 
     <Button
         android:id="@+id/addNewVehicleBtn"
@@ -32,149 +184,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="#FFFFFF" />
 
-    <EditText
-        android:id="@+id/newVehicleBrandEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Vehicle brand"
-        android:inputType="text"
-        android:shadowColor="#2C853B"
-        android:textAllCaps="true"
-        android:textColorHighlight="#2C853B"
-        android:textColorLink="#2C853B"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addVehicleTitle" />
-
-    <EditText
-        android:id="@+id/newVehicleModelEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Vehicle model"
-        android:inputType="text"
-        android:shadowColor="#2C853B"
-        android:textAllCaps="true"
-        android:textColorHighlight="#2C853B"
-        android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newVehicleBrandEt"
-        app:layout_constraintTop_toBottomOf="@+id/newVehicleBrandEt" />
-
-    <EditText
-        android:id="@+id/newVehicleEngineEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Engine capacity [L]"
-        android:inputType="numberDecimal"
-        android:textAllCaps="false"
-        android:textColorHighlight="#2C853B"
-        android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newVehicleModelEt"
-        app:layout_constraintTop_toBottomOf="@+id/newVehicleModelEt" />
-
-    <EditText
-        android:id="@+id/newVehicleHorseEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Engine power [HP]"
-        android:inputType="number"
-        android:textColorHighlight="#2C853B"
-        android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newVehicleEngineEt"
-        app:layout_constraintTop_toBottomOf="@+id/newVehicleEngineEt" />
-
-    <EditText
-        android:id="@+id/newVehicleYearEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Manufacture year"
-        android:inputType="number"
-        android:textColorHighlight="#2C853B"
-        android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newVehicleHorseEt"
-        app:layout_constraintTop_toBottomOf="@+id/newVehicleHorseEt" />
-
-    <EditText
-        android:id="@+id/newPlateNumberEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Plate number"
-        android:inputType="text"
-        android:textAllCaps="true"
-        android:textColorHighlight="#2C853B"
-        android:textColorLink="#2C853B"
-        app:layout_constraintStart_toStartOf="@+id/newVehicleYearEt"
-        app:layout_constraintTop_toBottomOf="@+id/newVehicleYearEt" />
-
-    <TextView
-        android:id="@+id/thisInspectionDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="41dp"
-        android:text="Inspection due date:"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt" />
-
-    <TextView
-        android:id="@+id/thisInsuranceDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="41dp"
-        android:text="Insurance due date:"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thisInspectionDate" />
-
-    <TextView
-        android:id="@+id/newInspectionTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="64dp"
-        android:drawableEnd="@drawable/ic_dropdown"
-        android:gravity="right"
-        android:hint="01.01.1970"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt" />
-
-    <TextView
-        android:id="@+id/newInsuranceTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:drawableEnd="@drawable/ic_dropdown"
-        android:gravity="right"
-        android:hint="01.01.1970"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/newInspectionTv"
-        app:layout_constraintTop_toBottomOf="@+id/newInspectionTv" />
-
     <ImageView
         android:id="@+id/imageCar2"
         android:layout_width="150dp"
         android:layout_height="300dp"
-        android:contentDescription="imageCar"
+        android:contentDescription="@string/imagecar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/car_daro"

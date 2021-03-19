@@ -71,11 +71,11 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(FuelActivity.this)
                 .setTitle("Delete fuelling")
                 .setMessage("Are you sure you want to delete this fuelling from the list?")
-                .setPositiveButton(android.R.string.yes, (dialog, wut) -> {
+                .setPositiveButton(R.string.yes, (dialog, wut) -> {
                     myDB.deleteOneFuel(fuelIds.get(position));
                     this.recreate();
                 })
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton(R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
         };

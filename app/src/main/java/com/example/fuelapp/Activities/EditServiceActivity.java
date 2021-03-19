@@ -56,14 +56,14 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
         new AlertDialog.Builder(EditServiceActivity.this)
                 .setTitle("Discard changes")
                 .setMessage("Are you sure you want to discard all changes?")
-                .setPositiveButton(android.R.string.yes, (dialog, position) -> {
+                .setPositiveButton(R.string.yes, (dialog, position) -> {
                     super.onBackPressed();
                     Intent intent = new Intent(getApplicationContext(), ServiceDetailsActivity.class);
                     intent.putExtra(COLUMN_SERVICE_ID, getServiceId());
                     startActivity(intent);
                     finish();
                 })
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton(R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }

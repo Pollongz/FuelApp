@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
-        android:hint="Example title"
+        android:hint="@string/title_and_description"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="6dp"
-        android:hint="Example title lorem ipsum tralalall coco moreno"
+        android:hint="@string/description_here"
         android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,9 +34,9 @@
         android:layout_height="18dp"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="6dp"
-        android:drawableEnd="@drawable/ic_dropdown"
-        android:gravity="right"
-        android:text="description"
+        android:gravity="end"
+        android:text="@string/description"
+        app:drawableEndCompat="@drawable/ic_dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/verticalDivider11" />
 
@@ -52,12 +52,12 @@
 
     <TextView
         android:id="@+id/serviceCostTv"
-        android:layout_width="wrap_content"
+        android:layout_width="88dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="252dp"
+        android:layout_marginStart="236dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:hint="133.37 PLN"
+        android:hint="@string/cost2"
         android:textSize="12sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,8 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:gravity="right"
-        android:hint="01-01-1970"
+        android:gravity="end"
+        android:hint="@string/date2"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

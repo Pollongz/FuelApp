@@ -5,8 +5,11 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import com.example.fuelapp.Database.DatabaseHelper;
 import com.example.fuelapp.R;
@@ -18,7 +21,8 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
     private String choosenDate;
-    private EditText newFuelTypeEt, newFuelAmountEt, newFuelCostEt, newMileageEt;
+    private Spinner newFuelTypeEt;
+    private EditText newFuelAmountEt, newFuelCostEt, newMileageEt;
     private TextView newFuelDateTv;
     private Button addNewFuelBtn;
 
@@ -37,6 +41,7 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
         newFuelDateTv.setText(getCurrentDate());
         newFuelDateTv.setOnClickListener(this);
         addNewFuelBtn.setOnClickListener(this);
+        newFuelTypeEt.setAdapter(createSpinner());
     }
 
     @Override
@@ -46,7 +51,7 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
         } else if (v == addNewFuelBtn) {
             DatabaseHelper myDB = new DatabaseHelper(AddFuelActivity.this);
             myDB.addFuel(
-                newFuelTypeEt.getText().toString().trim(),
+                newFuelTypeEt.getSelectedItem().toString().trim(),
                 Float.parseFloat(newFuelAmountEt.getText().toString().trim()),
                 Float.parseFloat(newFuelCostEt.getText().toString().trim()),
                 Integer.parseInt(newMileageEt.getText().toString().trim()),
@@ -57,6 +62,13 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
             intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
             startActivity(intent2);
         }
+    }
+
+    private SpinnerAdapter createSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.fuel_type, R.layout.spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return adapter;
     }
 
     private String getCarId() {

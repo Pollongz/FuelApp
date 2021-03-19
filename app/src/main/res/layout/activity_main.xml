@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
-    <ImageView
-        android:id="@+id/imageCar"
-        android:layout_width="150dp"
-        android:layout_height="300dp"
-        android:contentDescription="imageCar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/car_daro"
-        app:tint="#26151515"
-        app:tintMode="src_in" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vehicleRecycler"
         android:layout_width="411dp"
@@ -78,7 +67,19 @@
         android:contentDescription="@string/button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/imageCar"
+        android:layout_width="150dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/car_daro"
+        app:tint="#26151515"
+        app:tintMode="src_in"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
         android:id="@+id/emptyView"
@@ -90,7 +91,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499"
-        app:srcCompat="?attr/selectableItemBackground" />
+        app:srcCompat="?attr/selectableItemBackground"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
         android:id="@+id/emptyVehicle"
@@ -100,7 +102,8 @@
         app:layout_constraintEnd_toEndOf="@+id/emptyView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/emptyView"
-        app:srcCompat="@drawable/add_vehicle" />
+        app:srcCompat="@drawable/add_vehicle"
+        tools:ignore="ContentDescription"/>
 
     <FrameLayout
         android:id="@+id/fragment_profile"
