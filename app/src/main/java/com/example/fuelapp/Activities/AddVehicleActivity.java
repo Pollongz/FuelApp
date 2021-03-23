@@ -70,22 +70,41 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
         } else if (v == newInsuranceTv) {
             chooseDate(newInsuranceTv);
         } else if (v == addNewVehicleBtn) {
-            DatabaseHelper myDB = new DatabaseHelper(AddVehicleActivity.this);
-            myDB.addVehicle(newVehicleBrandEt.getText().toString().trim(),
-                    newVehicleModelEt.getText().toString().trim(),
-                    Float.parseFloat(newVehicleEngineEt.getText().toString().trim()),
-                    Integer.parseInt(newVehicleHorseEt.getText().toString().trim()),
-                    newInspectionTv.getText().toString().trim(),
-                    newInsuranceTv.getText().toString().trim(),
-                    Integer.parseInt(newVehicleYearEt.getText().toString().trim()),
-                    newPlateNumberEt.getText().toString().trim()
-            );
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            if (newVehicleBrandEt.getText().toString().trim().isEmpty()) {
+                emptyError(newVehicleBrandEt);
+            } else if (newVehicleModelEt.getText().toString().trim().isEmpty()) {
+                emptyError(newVehicleModelEt);
+            } else if (newVehicleEngineEt.getText().toString().trim().isEmpty()) {
+                emptyError(newVehicleEngineEt);
+            } else if (newVehicleHorseEt.getText().toString().trim().isEmpty()) {
+                emptyError(newVehicleHorseEt);
+            } else if (newVehicleYearEt.getText().toString().trim().isEmpty()) {
+                emptyError(newVehicleYearEt);
+            } else if (newPlateNumberEt.getText().toString().trim().isEmpty()) {
+                emptyError(newPlateNumberEt);
+            } else {
+                DatabaseHelper myDB = new DatabaseHelper(AddVehicleActivity.this);
+                myDB.addVehicle(newVehicleBrandEt.getText().toString().trim(),
+                        newVehicleModelEt.getText().toString().trim(),
+                        Float.parseFloat(newVehicleEngineEt.getText().toString().trim()),
+                        Integer.parseInt(newVehicleHorseEt.getText().toString().trim()),
+                        newInspectionTv.getText().toString().trim(),
+                        newInsuranceTv.getText().toString().trim(),
+                        Integer.parseInt(newVehicleYearEt.getText().toString().trim()),
+                        newPlateNumberEt.getText().toString().trim()
+                );
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
         }
     }
 
-    public String getCurrentDate() {
+    private void emptyError(TextView option) {
+        option.setError("This field is required");
+        option.requestFocus();
+    }
+
+    private String getCurrentDate() {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);

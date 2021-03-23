@@ -48,19 +48,32 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
         if (v == newServiceDateTv) {
             chooseDate(newServiceDateTv);
         } else if (v == addNewServicebtn) {
-            DatabaseHelper myDB = new DatabaseHelper(AddServiceActivity.this);
-            myDB.addServices(
-                    newServiceTitleEt.getText().toString().trim(),
-                    newServiceDescEt.getText().toString().trim(),
-                    Float.parseFloat(newServiceCostEt.getText().toString().trim()),
-                    newServiceDateTv.getText().toString().trim(),
-                    getCarId()
-            );
+            if (newServiceTitleEt.getText().toString().trim().isEmpty()) {
+                emptyError(newServiceTitleEt);
+            } else if (newServiceDescEt.getText().toString().trim().isEmpty()) {
+                emptyError(newServiceDescEt);
+            } else if (newServiceCostEt.getText().toString().trim().isEmpty()) {
+                emptyError(newServiceCostEt);
+            } else {
+                DatabaseHelper myDB = new DatabaseHelper(AddServiceActivity.this);
+                myDB.addServices(
+                        newServiceTitleEt.getText().toString().trim(),
+                        newServiceDescEt.getText().toString().trim(),
+                        Float.parseFloat(newServiceCostEt.getText().toString().trim()),
+                        newServiceDateTv.getText().toString().trim(),
+                        getCarId()
+                );
 
-            Intent intent2 = new Intent(this, ServiceActivity.class);
-            intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
-            startActivity(intent2);
+                Intent intent2 = new Intent(this, ServiceActivity.class);
+                intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
+                startActivity(intent2);
+            }
         }
+    }
+
+    private void emptyError(TextView option) {
+        option.setError("This field is required");
+        option.requestFocus();
     }
 
     private String getCarId() {

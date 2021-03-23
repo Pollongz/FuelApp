@@ -47,7 +47,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         return new MyViewHolder(itemView);
     }
 
-    //ustalenie co znajduje się na etykiecie elementu
+    //choosing what to put on the list
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
         holder.vehicleBrandTv.setText(String.valueOf(vehicleBrands.get(position)));

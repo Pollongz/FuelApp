@@ -20,7 +20,6 @@ import com.example.fuelapp.R;
 public class ServiceDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String COLUMN_SERVICE_ID = "service_id";
-    public static final String COLUMN_VEHICLE_ID = "_id";
     private TextView thisServiceTitleTv, thisServiceDescTv, thisServiceDateTv, thisServiceCostTv;
     private Button editService;
 
@@ -84,8 +83,4 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
         return intent.getStringExtra(ServiceActivity.COLUMN_SERVICE_ID);
     }
 
-    private String getCarId() {
-        Intent intent = getIntent();
-        return intent.getStringExtra(MainActivity.COLUMN_VEHICLE_ID);
-    }
 }

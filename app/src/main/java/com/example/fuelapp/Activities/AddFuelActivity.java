@@ -49,19 +49,32 @@ public class AddFuelActivity extends AppCompatActivity implements View.OnClickLi
         if (v == newFuelDateTv) {
             chooseDate(newFuelDateTv);
         } else if (v == addNewFuelBtn) {
-            DatabaseHelper myDB = new DatabaseHelper(AddFuelActivity.this);
-            myDB.addFuel(
-                newFuelTypeEt.getSelectedItem().toString().trim(),
-                Float.parseFloat(newFuelAmountEt.getText().toString().trim()),
-                Float.parseFloat(newFuelCostEt.getText().toString().trim()),
-                Integer.parseInt(newMileageEt.getText().toString().trim()),
-                newFuelDateTv.getText().toString().trim(),
-                getCarId()
-            );
-            Intent intent2 = new Intent(this, FuelActivity.class);
-            intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
-            startActivity(intent2);
+            if (newFuelAmountEt.getText().toString().trim().isEmpty()) {
+                emptyError(newFuelAmountEt);
+            } else if (newFuelCostEt.getText().toString().trim().isEmpty()) {
+                emptyError(newFuelCostEt);
+            } else if (newMileageEt.getText().toString().trim().isEmpty()) {
+                emptyError(newMileageEt);
+            } else {
+                DatabaseHelper myDB = new DatabaseHelper(AddFuelActivity.this);
+                myDB.addFuel(
+                        newFuelTypeEt.getSelectedItem().toString().trim(),
+                        Float.parseFloat(newFuelAmountEt.getText().toString().trim()),
+                        Float.parseFloat(newFuelCostEt.getText().toString().trim()),
+                        Integer.parseInt(newMileageEt.getText().toString().trim()),
+                        newFuelDateTv.getText().toString().trim(),
+                        getCarId()
+                );
+                Intent intent2 = new Intent(this, FuelActivity.class);
+                intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
+                startActivity(intent2);
+            }
         }
+    }
+
+    private void emptyError(TextView option) {
+        option.setError("This field is required");
+        option.requestFocus();
     }
 
     private SpinnerAdapter createSpinner() {

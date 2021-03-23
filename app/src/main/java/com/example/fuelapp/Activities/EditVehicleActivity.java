@@ -20,7 +20,6 @@ import java.util.Calendar;
 
 public class EditVehicleActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String COLUMN_VEHICLE_ID = "_id";
     final Calendar c = Calendar.getInstance();
     private int mYear, mMonth, mDay;
     private String choosenDate;
@@ -119,20 +118,39 @@ public class EditVehicleActivity extends AppCompatActivity implements View.OnCli
         } else if (v == editInsuranceTv) {
             chooseDate(editInsuranceTv);
         } else if (v == editVehicleBtn) {
-            DatabaseHelper myDB = new DatabaseHelper(EditVehicleActivity.this);
-            myDB.editVehicle(getCarId(),
-                    editVehicleBrandEt.getText().toString().trim(),
-                    editVehicleModelEt.getText().toString().trim(),
-                    Float.parseFloat(editVehicleEngineEt.getText().toString().trim()),
-                    Integer.parseInt(editVehicleHorseEt.getText().toString().trim()),
-                    editInspectionTv.getText().toString().trim(),
-                    editInsuranceTv.getText().toString().trim(),
-                    Integer.parseInt(editVehicleYearEt.getText().toString().trim()),
-                    editPlateNumberEt.getText().toString().trim()
-            );
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            if (editVehicleBrandEt.getText().toString().trim().isEmpty()) {
+                emptyError(editVehicleBrandEt);
+            } else if (editVehicleModelEt.getText().toString().trim().isEmpty()) {
+                emptyError(editVehicleModelEt);
+            } else if (editVehicleEngineEt.getText().toString().trim().isEmpty()) {
+                emptyError(editVehicleEngineEt);
+            } else if (editVehicleHorseEt.getText().toString().trim().isEmpty()) {
+                emptyError(editVehicleHorseEt);
+            } else if (editVehicleYearEt.getText().toString().trim().isEmpty()) {
+                emptyError(editVehicleYearEt);
+            } else if (editPlateNumberEt.getText().toString().trim().isEmpty()) {
+                emptyError(editPlateNumberEt);
+            } else {
+                DatabaseHelper myDB = new DatabaseHelper(EditVehicleActivity.this);
+                myDB.editVehicle(getCarId(),
+                        editVehicleBrandEt.getText().toString().trim(),
+                        editVehicleModelEt.getText().toString().trim(),
+                        Float.parseFloat(editVehicleEngineEt.getText().toString().trim()),
+                        Integer.parseInt(editVehicleHorseEt.getText().toString().trim()),
+                        editInspectionTv.getText().toString().trim(),
+                        editInsuranceTv.getText().toString().trim(),
+                        Integer.parseInt(editVehicleYearEt.getText().toString().trim()),
+                        editPlateNumberEt.getText().toString().trim()
+                );
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
         }
+    }
+
+    private void emptyError(TextView option) {
+        option.setError("This field is required");
+        option.requestFocus();
     }
 
     private String getCarId() {

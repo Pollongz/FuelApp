@@ -86,6 +86,43 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
         return null;
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == editServiceDateTv) {
+            chooseDate(editServiceDateTv);
+        } else if (v == editServicebtn) {
+            if (editServiceTitleEt.getText().toString().trim().isEmpty()) {
+                emptyError(editServiceTitleEt);
+            } else if (editServiceDescEt.getText().toString().trim().isEmpty()) {
+                emptyError(editServiceDescEt);
+            } else if (editServiceCostEt.getText().toString().trim().isEmpty()) {
+                emptyError(editServiceCostEt);
+            } else {
+                DatabaseHelper myDB = new DatabaseHelper(EditServiceActivity.this);
+                myDB.editService(
+                        getServiceId(),
+                        editServiceTitleEt.getText().toString().trim(),
+                        editServiceDescEt.getText().toString().trim(),
+                        Float.parseFloat(editServiceCostEt.getText().toString().trim()),
+                        editServiceDateTv.getText().toString().trim()
+                );
+                Intent intent = new Intent(getApplicationContext(), ServiceDetailsActivity.class);
+                intent.putExtra(COLUMN_SERVICE_ID, getServiceId());
+                startActivity(intent);
+            }
+        }
+    }
+
+    private void emptyError(TextView option) {
+        option.setError("This field is required");
+        option.requestFocus();
+    }
+
+    private String getServiceId() {
+        Intent intent = getIntent();
+        return intent.getStringExtra(ServiceActivity.COLUMN_SERVICE_ID);
+    }
+
     private void chooseDate(TextView option) {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
@@ -105,29 +142,5 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
                     option.setText(choosenDate);
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
-    }
-
-    private String getServiceId() {
-        Intent intent = getIntent();
-        return intent.getStringExtra(ServiceActivity.COLUMN_SERVICE_ID);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == editServiceDateTv) {
-            chooseDate(editServiceDateTv);
-        } else if (v == editServicebtn) {
-            DatabaseHelper myDB = new DatabaseHelper(EditServiceActivity.this);
-            myDB.editService(
-                    getServiceId(),
-                    editServiceTitleEt.getText().toString().trim(),
-                    editServiceDescEt.getText().toString().trim(),
-                    Float.parseFloat(editServiceCostEt.getText().toString().trim()),
-                    editServiceDateTv.getText().toString().trim()
-            );
-            Intent intent = new Intent(getApplicationContext(), ServiceDetailsActivity.class);
-            intent.putExtra(COLUMN_SERVICE_ID, getServiceId());
-            startActivity(intent);
-        }
     }
 }
