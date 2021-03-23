@@ -8,38 +8,28 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vehicleRecycler"
-        android:layout_width="411dp"
-        android:layout_height="436dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="124dp"
         android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.642" />
-
-    <TextView
-        android:id="@+id/title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/history_of_your_vehicle_in_one_place"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/FuelAppTitle"
-        app:layout_constraintStart_toStartOf="@+id/FuelAppTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/vehiclesTitle" />
 
     <TextView
         android:id="@+id/FuelAppTitle"
         android:layout_width="0dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/archivo_black"
         android:foregroundGravity="center"
         android:gravity="center"
         android:text="@string/fuelapp"
         android:textColor="#2C853B"
-        android:textSize="90sp"
+        android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,13 +39,13 @@
         android:id="@+id/vehiclesTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="@string/your_vehicles"
-        app:layout_constraintBottom_toTopOf="@+id/vehicleRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FuelAppTitle" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/goToAddVehicleBtn"
@@ -107,10 +97,14 @@
 
     <FrameLayout
         android:id="@+id/fragment_profile"
-        android:layout_width="match_parent"
-        android:layout_height="590dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FuelAppTitle">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

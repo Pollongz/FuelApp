@@ -34,7 +34,7 @@
         android:id="@+id/verticalDivider"
         android:layout_width="1dp"
         android:layout_height="40dp"
-        android:layout_marginStart="324dp"
+        android:layout_marginStart="312dp"
         android:background="#2C853B"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,12 +43,12 @@
         android:id="@+id/CostTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="268dp"
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="@string/cost"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/verticalDivider"
+        app:layout_constraintStart_toEndOf="@+id/verticalDivider9"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -65,11 +65,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="@string/date"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/verticalDivider"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View

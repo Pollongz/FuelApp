@@ -57,15 +57,17 @@
 
     <TextView
         android:id="@+id/newFuelDateTv"
-        android:layout_width="118dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="76dp"
         android:gravity="start"
         android:textSize="20sp"
+        app:drawableEndCompat="@drawable/ic_dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newFuelTypeEt"
-        app:drawableEndCompat="@drawable/ic_dropdown" />
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toEndOf="@+id/titleServiceDateTv"
+        app:layout_constraintTop_toBottomOf="@+id/newFuelTypeEt" />
 
     <Button
         android:id="@+id/addNewFuelBtn"
@@ -79,6 +81,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newMileageEt"
         app:rippleColor="#FFFFFF" />
 
     <TextView

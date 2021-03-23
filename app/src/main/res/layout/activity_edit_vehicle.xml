@@ -31,6 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thisInsuranceDate"
         app:rippleColor="#FFFFFF" />
 
     <TextView
@@ -48,6 +49,7 @@
         android:id="@+id/editVehicleBrandEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
@@ -62,6 +64,7 @@
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/brandTitle"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleTitle" />
 
     <TextView
@@ -79,6 +82,7 @@
         android:id="@+id/editVehicleModelEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
@@ -93,6 +97,7 @@
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/modelTitle"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleBrandEt" />
 
     <TextView
@@ -110,6 +115,7 @@
         android:id="@+id/editVehicleEngineEt"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
@@ -122,6 +128,7 @@
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eCapacityTitle"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleModelEt" />
 
     <TextView
@@ -139,6 +146,7 @@
         android:id="@+id/editVehicleHorseEt"
         android:layout_width="133dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
@@ -150,6 +158,7 @@
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ePowerTitle"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleEngineEt" />
 
     <TextView
@@ -167,6 +176,7 @@
         android:id="@+id/editVehicleYearEt"
         android:layout_width="143dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
@@ -178,6 +188,7 @@
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mYearTitle"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleHorseEt" />
 
     <TextView
@@ -195,6 +206,7 @@
         android:id="@+id/editPlateNumberEt"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="36dp"
         android:ems="10"
@@ -207,6 +219,7 @@
         android:textColorHighlight="#2C853B"
         android:textColorLink="#2C853B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pNumberTitle"
         app:layout_constraintTop_toBottomOf="@+id/editVehicleYearEt"
         tools:ignore="TextFields" />
 
@@ -236,23 +249,30 @@
         android:id="@+id/editInspectionTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="36dp"
         android:gravity="end"
         android:textSize="16sp"
         app:drawableEndCompat="@drawable/ic_dropdown"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/thisInspectionDate"
         app:layout_constraintTop_toBottomOf="@+id/editPlateNumberEt" />
 
     <TextView
         android:id="@+id/editInsuranceTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:gravity="end"
         android:textSize="16sp"
         app:drawableEndCompat="@drawable/ic_dropdown"
-        app:layout_constraintStart_toStartOf="@+id/editInspectionTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintStart_toEndOf="@+id/thisInsuranceDate"
         app:layout_constraintTop_toBottomOf="@+id/editInspectionTv" />
 
     <ImageView

@@ -94,8 +94,11 @@
 
     <TextView
         android:id="@+id/thisServiceDescTv"
-        android:layout_width="371dp"
-        android:layout_height="450dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginBottom="100dp"
         android:background="#73E4E4E4"
         android:hint="@string/description_here"
@@ -108,7 +111,8 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thisServDateTv" />
 
     <ImageView
         android:id="@+id/imageService2"

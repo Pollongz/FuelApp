@@ -130,8 +130,8 @@
         android:id="@+id/thisInspectionDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
         android:text="@string/inspection_due_date"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,8 +141,8 @@
         android:id="@+id/thisInsuranceDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
         android:text="@string/insurance_due_date"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,29 +152,35 @@
         android:id="@+id/newInspectionTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="64dp"
         android:gravity="end"
         android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt"
-        app:drawableEndCompat="@drawable/ic_dropdown" />
+        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintStart_toEndOf="@+id/thisInspectionDate"
+        app:layout_constraintTop_toBottomOf="@+id/newPlateNumberEt" />
 
     <TextView
         android:id="@+id/newInsuranceTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="64dp"
         android:gravity="end"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/newInspectionTv"
-        app:layout_constraintTop_toBottomOf="@+id/newInspectionTv"
-        app:drawableEndCompat="@drawable/ic_dropdown" />
+        app:drawableEndCompat="@drawable/ic_dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.732"
+        app:layout_constraintStart_toEndOf="@+id/thisInsuranceDate"
+        app:layout_constraintTop_toBottomOf="@+id/newInspectionTv" />
 
     <Button
         android:id="@+id/addNewVehicleBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="54dp"
         android:text="@string/add_a_new_vehicle"
         app:backgroundTint="#2C853B"
@@ -182,6 +188,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thisInsuranceDate"
         app:rippleColor="#FFFFFF" />
 
     <ImageView

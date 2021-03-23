@@ -41,13 +41,17 @@
 
     <EditText
         android:id="@+id/editServiceDescEt"
-        android:layout_width="371dp"
-        android:layout_height="320dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
         android:background="#73E4E4E4"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/add_a_description"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:lines="12"
         android:maxLength="400"
@@ -57,17 +61,17 @@
         android:paddingRight="6dp"
         android:paddingBottom="6dp"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/titleServiceCostTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editServiceTitleEt" />
 
     <EditText
         android:id="@+id/editServiceCostEt"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="4dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:gravity="start"
@@ -79,22 +83,27 @@
         android:textSize="20sp"
         app:backgroundTint="@color/main_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.668"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.278"
+        app:layout_constraintStart_toEndOf="@+id/titleServiceCostTv"
         app:layout_constraintTop_toBottomOf="@+id/editServiceDescEt" />
 
     <TextView
         android:id="@+id/editServiceDateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="132dp"
         android:gravity="end"
-        android:hint="@string/_01_01_1970"
         android:textSize="20sp"
         app:drawableEndCompat="@drawable/ic_dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintStart_toEndOf="@+id/titleServiceDateTv"
+        app:layout_constraintTop_toBottomOf="@+id/editServiceCostEt"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/titleServiceDateTv"
@@ -106,14 +115,16 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleServiceCostTv"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/titleServiceCostTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="188dp"
+        android:layout_marginBottom="184dp"
         android:text="@string/service_cost"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -133,6 +144,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleServiceDateTv"
         app:rippleColor="#FFFFFF" />
 
     <ImageView

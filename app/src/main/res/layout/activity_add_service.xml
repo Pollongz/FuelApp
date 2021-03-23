@@ -41,9 +41,12 @@
 
     <EditText
         android:id="@+id/newServiceDescEt"
-        android:layout_width="371dp"
-        android:layout_height="320dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="6dp"
         android:background="#73E4E4E4"
         android:ems="10"
         android:gravity="start|top"
@@ -58,16 +61,16 @@
         android:paddingRight="6dp"
         android:paddingBottom="6dp"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/titleServiceCostTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/newServiceTitleEt" />
 
     <EditText
         android:id="@+id/newServiceCostEt"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:gravity="start"
@@ -78,21 +81,26 @@
         android:textSize="20sp"
         app:backgroundTint="@color/main_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.668"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintStart_toEndOf="@+id/titleServiceCostTv"
         app:layout_constraintTop_toBottomOf="@+id/newServiceDescEt" />
 
     <TextView
         android:id="@+id/newServiceDateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="96dp"
         android:layout_marginBottom="132dp"
         android:gravity="end"
         android:textSize="20sp"
         app:drawableEndCompat="@drawable/ic_dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toEndOf="@+id/titleServiceDateTv"
+        app:layout_constraintTop_toBottomOf="@+id/newServiceCostEt"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/titleServiceDateTv"
@@ -131,6 +139,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleServiceDateTv"
         app:rippleColor="#FFFFFF" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

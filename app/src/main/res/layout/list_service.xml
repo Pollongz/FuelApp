@@ -52,14 +52,17 @@
 
     <TextView
         android:id="@+id/serviceCostTv"
-        android:layout_width="88dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="236dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:hint="@string/cost2"
+        android:maxLength="6"
+        android:maxLines="2"
         android:textSize="12sp"
         android:textStyle="normal"
+        app:layout_constraintEnd_toStartOf="@+id/verticalDivider8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +70,7 @@
         android:id="@+id/verticalDivider8"
         android:layout_width="1dp"
         android:layout_height="50dp"
-        android:layout_marginStart="324dp"
+        android:layout_marginStart="312dp"
         android:background="#2C853B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,11 +81,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
         android:gravity="end"
         android:hint="@string/date2"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/verticalDivider8"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
