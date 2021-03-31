@@ -63,13 +63,11 @@
             android:id="@+id/newFuelDateTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="36dp"
-            android:layout_marginEnd="76dp"
             android:gravity="start"
             android:textSize="20sp"
             app:drawableEndCompat="@drawable/ic_dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.904"
             app:layout_constraintStart_toEndOf="@+id/titleServiceDateTv"
             app:layout_constraintTop_toBottomOf="@+id/newFuelTypeEt" />
 
@@ -77,7 +75,8 @@
             android:id="@+id/addNewFuelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="54dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="50dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/add_a_refuel"
             app:backgroundTint="#2C853B"
@@ -122,8 +121,7 @@
             android:spinnerMode="dialog"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.76"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fuelTypeNewTitle"
             app:layout_constraintTop_toBottomOf="@+id/refuelDataTitle" />
 
         <TextView
