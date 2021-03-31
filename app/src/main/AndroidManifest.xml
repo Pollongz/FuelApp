@@ -16,15 +16,15 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.FuelApp">
-        <activity android:name=".Activities.EditServiceActivity"/>
-        <activity android:name=".Activities.EditVehicleActivity" />
-        <activity android:name=".Activities.ServiceDetailsActivity" />
-        <activity android:name=".Activities.AddServiceActivity" />
-        <activity android:name=".Activities.ServiceActivity" />
-        <activity android:name=".Activities.AddFuelActivity" />
-        <activity android:name=".Activities.FuelActivity" />
-        <activity android:name=".Activities.AddVehicleActivity" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".activities.EditServiceActivity"/>
+        <activity android:name=".activities.EditVehicleActivity" />
+        <activity android:name=".activities.ServiceDetailsActivity" />
+        <activity android:name=".activities.AddServiceActivity" />
+        <activity android:name=".activities.ServiceActivity" />
+        <activity android:name=".activities.AddFuelActivity" />
+        <activity android:name=".activities.FuelActivity" />
+        <activity android:name=".activities.AddVehicleActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

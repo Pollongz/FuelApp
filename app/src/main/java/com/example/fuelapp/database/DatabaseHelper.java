@@ -1,4 +1,4 @@
-package com.example.fuelapp.Database;
+package com.example.fuelapp.database;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;

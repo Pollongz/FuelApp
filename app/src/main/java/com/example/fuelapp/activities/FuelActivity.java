@@ -1,4 +1,4 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,14 +9,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.fuelapp.Database.DatabaseHelper;
-import com.example.fuelapp.Fragments.ProfileFragment;
+import com.example.fuelapp.database.DatabaseHelper;
 import com.example.fuelapp.R;
-import com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter;
+import com.example.fuelapp.recyclerViews.RecyclerFuelAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String COLUMN_VEHICLE_ID = "_id";
     private DatabaseHelper myDB;
-    private com.example.fuelapp.RecyclerViews.RecyclerFuelAdapter.RecyclerViewLongClickListener hListener;
+    private com.example.fuelapp.recyclerViews.RecyclerFuelAdapter.RecyclerViewLongClickListener hListener;
     private ArrayList<String> fuelIds, fuelTypes, fuelAmounts, fuelCosts, mileages, fuelDates, fueledVehicleIds;
     private ImageView emptyFuel, emptyView;
     private RecyclerView fuelRecycler;

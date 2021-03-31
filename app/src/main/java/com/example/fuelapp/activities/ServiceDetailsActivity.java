@@ -1,4 +1,4 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

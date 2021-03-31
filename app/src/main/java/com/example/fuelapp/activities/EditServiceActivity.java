@@ -1,4 +1,4 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.database.DatabaseHelper;
 import com.example.fuelapp.R;
 
 import java.util.Calendar;

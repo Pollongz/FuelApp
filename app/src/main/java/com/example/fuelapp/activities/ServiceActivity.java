@@ -1,4 +1,4 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +10,10 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.database.DatabaseHelper;
 import com.example.fuelapp.R;
-import com.example.fuelapp.RecyclerViews.RecyclerServiceAdapter;
+import com.example.fuelapp.recyclerViews.RecyclerServiceAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -24,8 +23,8 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
     public static final String COLUMN_VEHICLE_ID = "_id";
     public static final String COLUMN_SERVICE_ID = "service_id";
     private DatabaseHelper myDB;
-    private com.example.fuelapp.RecyclerViews.RecyclerServiceAdapter.RecyclerViewClickListener listener;
-    private com.example.fuelapp.RecyclerViews.RecyclerServiceAdapter.RecyclerViewLongClickListener hListener;
+    private com.example.fuelapp.recyclerViews.RecyclerServiceAdapter.RecyclerViewClickListener listener;
+    private com.example.fuelapp.recyclerViews.RecyclerServiceAdapter.RecyclerViewLongClickListener hListener;
     private ImageView emptyService, emptyView;
     private RecyclerView serviceRecycler;
     private RecyclerServiceAdapter RecyclerServiceAdapter;

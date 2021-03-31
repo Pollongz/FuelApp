@@ -1,4 +1,4 @@
-package com.example.fuelapp.Fragments;
+package com.example.fuelapp.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,11 +16,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.fuelapp.Activities.EditVehicleActivity;
-import com.example.fuelapp.Activities.FuelActivity;
-import com.example.fuelapp.Activities.MainActivity;
-import com.example.fuelapp.Activities.ServiceActivity;
-import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.activities.EditVehicleActivity;
+import com.example.fuelapp.activities.FuelActivity;
+import com.example.fuelapp.activities.MainActivity;
+import com.example.fuelapp.activities.ServiceActivity;
+import com.example.fuelapp.database.DatabaseHelper;
 import com.example.fuelapp.R;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {

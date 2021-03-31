@@ -11,7 +11,7 @@
         android:background="@drawable/round"
         android:clickable="true"
         android:focusable="true"
-        tools:context=".Fragments.ProfileFragment">
+        tools:context=".fragments.ProfileFragment">
 
 
         <Button
