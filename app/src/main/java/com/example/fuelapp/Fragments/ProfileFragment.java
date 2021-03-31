@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -27,12 +26,19 @@ import com.example.fuelapp.R;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private static final String COLUMN_VEHICLE_ID = "_id";
-    private TextView myVehicleBrand, myVehicleModel, myVehicleYear, myEngineCapacity, myEnginePower, myInspectionDate, myInsuranceDate, myPlateNumber;
-    private Button goToFuelList, goToServiceList, deleteItem, editVehicle;
-    public String value;
-
-    public ProfileFragment() {
-    }
+    private TextView myVehicleBrand;
+    private TextView myVehicleModel;
+    private TextView myVehicleYear;
+    private TextView myEngineCapacity;
+    private TextView myEnginePower;
+    private TextView myInspectionDate;
+    private TextView myInsuranceDate;
+    private TextView myPlateNumber;
+    private Button goToFuelList;
+    private Button goToServiceList;
+    private Button deleteItem;
+    private Button editVehicle;
+    private String value;
 
     public static ProfileFragment newInstance(String value) {
         ProfileFragment fragment = new ProfileFragment();
@@ -89,20 +95,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @SuppressLint("Recycle")
     private String getVehiclesData(int option) {
-        SQLiteDatabase db = getActivity().openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null);
         Cursor cursor;
-        if(db != null) {
+        try(SQLiteDatabase db = getActivity().openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null)) {
             cursor = db.rawQuery("SELECT _id,vehicle_brand,vehicle_model,vehicle_engine_capacity,vehicle_horse_power,vehicle_inspection_date,vehicle_insurance_date,vehicle_year_made, vehicle_plate_number  FROM vehicles WHERE _id = " + value, null);
-            if (cursor.getCount() == 0) {
-               //no data
-            }
+
             StringBuilder buffer = new StringBuilder();
             while (cursor.moveToNext()) {
                 buffer.append(cursor.getString(option));
             }
             return buffer.toString();
         }
-        return null;
     }
 
     @Override
@@ -116,18 +118,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             intent1.putExtra(COLUMN_VEHICLE_ID, value);
             startActivity(intent1);
         } else if (v == deleteItem) {
-            DatabaseHelper myDB = new DatabaseHelper(getActivity());
-            new AlertDialog.Builder(getContext())
-                    .setTitle("Delete vehicle")
-                    .setMessage("Are you sure you want to delete this vehicle from the list?")
-                    .setPositiveButton(android.R.string.yes, (dialog, position) -> {
-                        myDB.deleteOneVehicle(value);
-                        Intent intent12 = new Intent(getContext(), MainActivity.class);
-                        startActivity(intent12);
-                    })
-                    .setNegativeButton(android.R.string.no, null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+            try(DatabaseHelper myDB = new DatabaseHelper(getActivity())) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Delete vehicle")
+                        .setMessage("Are you sure you want to delete this vehicle from the list?")
+                        .setPositiveButton(android.R.string.ok, (dialog, position) -> {
+                            myDB.deleteOneVehicle(value);
+                            Intent intent12 = new Intent(getContext(), MainActivity.class);
+                            startActivity(intent12);
+                        })
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
         } else if (v == editVehicle) {
             Intent intent1 = new Intent(getContext(), EditVehicleActivity.class);
             intent1.putExtra(COLUMN_VEHICLE_ID, value);

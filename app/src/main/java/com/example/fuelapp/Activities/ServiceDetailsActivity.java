@@ -1,6 +1,5 @@
 package com.example.fuelapp.Activities;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -14,13 +13,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fuelapp.Database.DatabaseHelper;
 import com.example.fuelapp.R;
 
 public class ServiceDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String COLUMN_SERVICE_ID = "service_id";
-    private TextView thisServiceTitleTv, thisServiceDescTv, thisServiceDateTv, thisServiceCostTv;
+    private TextView thisServiceTitleTv;
+    private TextView thisServiceDescTv;
+    private TextView thisServiceDateTv;
+    private TextView thisServiceCostTv;
     private Button editService;
 
     @Override
@@ -53,10 +54,10 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
 
     @SuppressLint("Recycle")
     private String getServicesData(int option) {
-        SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null);
         Cursor cursor;
-        if(db != null) {
+        try(SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null)) {
             cursor = db.rawQuery("SELECT service_id,service_title,service_desc,service_cost,service_date,serviced_vehicle_id  FROM services WHERE service_id = " + getServiceId(), null);
+
             if (cursor.getCount() == 0) {
                 Toast.makeText(getApplicationContext(), "no data", Toast.LENGTH_SHORT).show();
             }
@@ -66,7 +67,6 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
             }
             return buffer.toString();
         }
-        return null;
     }
 
     @Override
