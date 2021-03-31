@@ -1,6 +1,5 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -11,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.database.DatabaseHelper;
 import com.example.fuelapp.R;
 
 import java.util.Calendar;
@@ -20,11 +19,15 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
 
     public static final String COLUMN_VEHICLE_ID = "_id";
     final Calendar c = Calendar.getInstance();
-    private int mYear, mMonth, mDay;
-    private String choosenDate;
-    private EditText newServiceTitleEt, newServiceDescEt, newServiceCostEt;
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    private String chosenDate;
+    private EditText newServiceTitleEt;
+    private EditText newServiceDescEt;
+    private EditText newServiceCostEt;
     private TextView newServiceDateTv;
-    private Button addNewServicebtn;
+    private Button addNewServiceBtn;
 
 
     @Override
@@ -36,18 +39,18 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
         newServiceCostEt = findViewById(R.id.newServiceCostEt);
         newServiceDescEt = findViewById(R.id.newServiceDescEt);
         newServiceDateTv = findViewById(R.id.newServiceDateTv);
-        addNewServicebtn = findViewById(R.id.addNewServiceBtn);
+        addNewServiceBtn = findViewById(R.id.addNewServiceBtn);
 
         newServiceDateTv.setText(getCurrentDate());
         newServiceDateTv.setOnClickListener(this);
-        addNewServicebtn.setOnClickListener(this);
+        addNewServiceBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v == newServiceDateTv) {
             chooseDate(newServiceDateTv);
-        } else if (v == addNewServicebtn) {
+        } else if (v == addNewServiceBtn) {
             if (newServiceTitleEt.getText().toString().trim().isEmpty()) {
                 emptyError(newServiceTitleEt);
             } else if (newServiceDescEt.getText().toString().trim().isEmpty()) {
@@ -55,14 +58,15 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
             } else if (newServiceCostEt.getText().toString().trim().isEmpty()) {
                 emptyError(newServiceCostEt);
             } else {
-                DatabaseHelper myDB = new DatabaseHelper(AddServiceActivity.this);
-                myDB.addServices(
-                        newServiceTitleEt.getText().toString().trim(),
-                        newServiceDescEt.getText().toString().trim(),
-                        Float.parseFloat(newServiceCostEt.getText().toString().trim()),
-                        newServiceDateTv.getText().toString().trim(),
-                        getCarId()
-                );
+                try(DatabaseHelper myDB = new DatabaseHelper(AddServiceActivity.this)) {
+                    myDB.addServices(
+                            newServiceTitleEt.getText().toString().trim(),
+                            newServiceDescEt.getText().toString().trim(),
+                            Float.parseFloat(newServiceCostEt.getText().toString().trim()),
+                            newServiceDateTv.getText().toString().trim(),
+                            getCarId()
+                    );
+                }
 
                 Intent intent2 = new Intent(this, ServiceActivity.class);
                 intent2.putExtra(COLUMN_VEHICLE_ID, getCarId());
@@ -101,15 +105,15 @@ public class AddServiceActivity extends AppCompatActivity implements View.OnClic
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     if (dayOfMonth < 10 && monthOfYear < 9) {
-                        choosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                        chosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
                     } else if (dayOfMonth < 10) {
-                        choosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        chosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
                     } else if (monthOfYear < 9) {
-                        choosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                        chosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
                     } else {
-                        choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        chosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
                     }
-                    option.setText(choosenDate);
+                    option.setText(chosenDate);
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }

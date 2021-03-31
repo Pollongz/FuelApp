@@ -1,4 +1,4 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.database.DatabaseHelper;
 import com.example.fuelapp.R;
 
 import java.util.Calendar;
@@ -19,10 +19,20 @@ import java.util.Calendar;
 public class AddVehicleActivity extends AppCompatActivity implements View.OnClickListener {
 
     final Calendar c = Calendar.getInstance();
-    private int mYear, mMonth, mDay;
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+
     private String choosenDate;
-    private EditText newVehicleBrandEt, newVehicleModelEt, newVehicleHorseEt, newVehicleEngineEt, newVehicleYearEt, newPlateNumberEt;
-    private TextView newInspectionTv, newInsuranceTv;
+
+    private EditText newVehicleBrandEt;
+    private EditText newVehicleModelEt;
+    private EditText newVehicleHorseEt;
+    private EditText newVehicleEngineEt;
+    private EditText newVehicleYearEt;
+    private EditText newPlateNumberEt;
+    private TextView newInspectionTv;
+    private TextView newInsuranceTv;
     private Button addNewVehicleBtn;
 
     @Override
@@ -83,16 +93,18 @@ public class AddVehicleActivity extends AppCompatActivity implements View.OnClic
             } else if (newPlateNumberEt.getText().toString().trim().isEmpty()) {
                 emptyError(newPlateNumberEt);
             } else {
-                DatabaseHelper myDB = new DatabaseHelper(AddVehicleActivity.this);
-                myDB.addVehicle(newVehicleBrandEt.getText().toString().trim(),
-                        newVehicleModelEt.getText().toString().trim(),
-                        Float.parseFloat(newVehicleEngineEt.getText().toString().trim()),
-                        Integer.parseInt(newVehicleHorseEt.getText().toString().trim()),
-                        newInspectionTv.getText().toString().trim(),
-                        newInsuranceTv.getText().toString().trim(),
-                        Integer.parseInt(newVehicleYearEt.getText().toString().trim()),
-                        newPlateNumberEt.getText().toString().trim()
-                );
+                try(DatabaseHelper myDB = new DatabaseHelper(AddVehicleActivity.this)) {
+                    myDB.addVehicle(newVehicleBrandEt.getText().toString().trim(),
+                            newVehicleModelEt.getText().toString().trim(),
+                            Float.parseFloat(newVehicleEngineEt.getText().toString().trim()),
+                            Integer.parseInt(newVehicleHorseEt.getText().toString().trim()),
+                            newInspectionTv.getText().toString().trim(),
+                            newInsuranceTv.getText().toString().trim(),
+                            Integer.parseInt(newVehicleYearEt.getText().toString().trim()),
+                            newPlateNumberEt.getText().toString().trim()
+                    );
+                }
+
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }

@@ -1,4 +1,4 @@
-package com.example.fuelapp.RecyclerViews;
+package com.example.fuelapp.recyclerViews;
 
 import android.content.Context;
 import android.view.LayoutInflater;

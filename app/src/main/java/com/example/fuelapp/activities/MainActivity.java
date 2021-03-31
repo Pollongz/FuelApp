@@ -1,9 +1,6 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.app.ActivityCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,21 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.fuelapp.Database.DatabaseHelper;
-import com.example.fuelapp.Fragments.ProfileFragment;
+import com.example.fuelapp.database.DatabaseHelper;
+import com.example.fuelapp.fragments.ProfileFragment;
 import com.example.fuelapp.R;
-import com.example.fuelapp.RecyclerViews.RecyclerAdapter;
+import com.example.fuelapp.recyclerViews.RecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -34,9 +26,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String COLUMN_VEHICLE_ID = "_id";
     private DatabaseHelper myDB;
-    private com.example.fuelapp.RecyclerViews.RecyclerAdapter.RecyclerViewClickListener listener;
+    private com.example.fuelapp.recyclerViews.RecyclerAdapter.RecyclerViewClickListener listener;
     private ArrayList<String> vehicleIds, vehicleBrands, vehicleModels, vehicleHorses, vehicleEngines, vehicleYears, plateNumbers;
     private ImageView emptyVehicle, emptyView;
+    private TextView vehiclesTitle;
     private RecyclerView recyclerView;
     private RecyclerAdapter RecyclerAdapter;
     private FloatingActionButton goToAddVehicleBtn;
@@ -53,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentProfile = findViewById(R.id.fragment_profile);
         recyclerView = findViewById(R.id.vehicleRecycler);
         goToAddVehicleBtn = findViewById(R.id.goToAddVehicleBtn);
+        vehiclesTitle = findViewById(R.id.vehiclesTitle);
 
         goToAddVehicleBtn.setOnClickListener(this);
 
@@ -66,7 +60,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plateNumbers = new ArrayList<>();
 
         storeVehiclesInArrays();
+        setVisibilityOfMainActivityElements();
         createAdapter();
+    }
+
+    private void setVisibilityOfMainActivityElements() {
+        int carListVisible = isNoVehicles() ? View.VISIBLE : View.INVISIBLE;
+        int carListInvisible = !isNoVehicles() ? View.VISIBLE : View.INVISIBLE;
+
+        emptyView.setVisibility(carListVisible);
+        emptyVehicle.setVisibility(carListVisible);
+        vehiclesTitle.setVisibility(carListInvisible);
     }
 
     private void createAdapter() {
@@ -93,12 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void storeVehiclesInArrays() {
         Cursor cursor = myDB.readAllVehicles();
-        if (cursor.getCount() == 0) {
-            emptyView.setVisibility(View.VISIBLE);
-            emptyVehicle.setVisibility(View.VISIBLE);
-        } else {
-            emptyView.setVisibility(View.GONE);
-            emptyVehicle.setVisibility(View.GONE);
+        if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 vehicleIds.add(cursor.getString(0));
                 vehicleBrands.add(cursor.getString(1));
@@ -109,6 +108,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 plateNumbers.add(cursor.getString(8));
             }
         }
+    }
+
+    private boolean isNoVehicles() {
+        return vehicleIds.isEmpty();
     }
 
     @Override

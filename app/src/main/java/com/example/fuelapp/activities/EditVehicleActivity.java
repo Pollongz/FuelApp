@@ -1,4 +1,4 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,17 +14,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.database.DatabaseHelper;
 import com.example.fuelapp.R;
 import java.util.Calendar;
 
 public class EditVehicleActivity extends AppCompatActivity implements View.OnClickListener {
 
     final Calendar c = Calendar.getInstance();
-    private int mYear, mMonth, mDay;
-    private String choosenDate;
-    private EditText editVehicleBrandEt, editVehicleModelEt, editVehicleHorseEt, editVehicleEngineEt, editVehicleYearEt, editPlateNumberEt;
-    private TextView editInspectionTv, editInsuranceTv;
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    private String chosenDate;
+    private EditText editVehicleBrandEt;
+    private EditText editVehicleModelEt;
+    private EditText editVehicleHorseEt;
+    private EditText editVehicleEngineEt;
+    private EditText editVehicleYearEt;
+    private EditText editPlateNumberEt;
+    private TextView editInspectionTv;
+    private TextView editInsuranceTv;
     private Button editVehicleBtn;
 
     @Override
@@ -74,10 +82,11 @@ public class EditVehicleActivity extends AppCompatActivity implements View.OnCli
 
     @SuppressLint("Recycle")
     private String getVehiclesData(int option) {
-        SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null);
         Cursor cursor;
-        if(db != null) {
+
+        try(SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null)) {
             cursor = db.rawQuery("SELECT _id,vehicle_brand,vehicle_model,vehicle_engine_capacity,vehicle_horse_power,vehicle_inspection_date,vehicle_insurance_date,vehicle_year_made, vehicle_plate_number  FROM vehicles WHERE _id = " + getCarId(), null);
+
             if (cursor.getCount() == 0) {
                 Toast.makeText(getApplicationContext(), "no data", Toast.LENGTH_SHORT).show();
             }
@@ -87,7 +96,6 @@ public class EditVehicleActivity extends AppCompatActivity implements View.OnCli
             }
             return buffer.toString();
         }
-        return null;
     }
 
     private void chooseDate(TextView option) {
@@ -98,15 +106,15 @@ public class EditVehicleActivity extends AppCompatActivity implements View.OnCli
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     if (dayOfMonth < 10 && monthOfYear < 9) {
-                        choosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                        chosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
                     } else if (dayOfMonth < 10) {
-                        choosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        chosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
                     } else if (monthOfYear < 9) {
-                        choosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                        chosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
                     } else {
-                        choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        chosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
                     }
-                    option.setText(choosenDate);
+                    option.setText(chosenDate);
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
@@ -131,17 +139,19 @@ public class EditVehicleActivity extends AppCompatActivity implements View.OnCli
             } else if (editPlateNumberEt.getText().toString().trim().isEmpty()) {
                 emptyError(editPlateNumberEt);
             } else {
-                DatabaseHelper myDB = new DatabaseHelper(EditVehicleActivity.this);
-                myDB.editVehicle(getCarId(),
-                        editVehicleBrandEt.getText().toString().trim(),
-                        editVehicleModelEt.getText().toString().trim(),
-                        Float.parseFloat(editVehicleEngineEt.getText().toString().trim()),
-                        Integer.parseInt(editVehicleHorseEt.getText().toString().trim()),
-                        editInspectionTv.getText().toString().trim(),
-                        editInsuranceTv.getText().toString().trim(),
-                        Integer.parseInt(editVehicleYearEt.getText().toString().trim()),
-                        editPlateNumberEt.getText().toString().trim()
-                );
+                try(DatabaseHelper myDB = new DatabaseHelper(EditVehicleActivity.this)) {
+                    myDB.editVehicle(getCarId(),
+                            editVehicleBrandEt.getText().toString().trim(),
+                            editVehicleModelEt.getText().toString().trim(),
+                            Float.parseFloat(editVehicleEngineEt.getText().toString().trim()),
+                            Integer.parseInt(editVehicleHorseEt.getText().toString().trim()),
+                            editInspectionTv.getText().toString().trim(),
+                            editInsuranceTv.getText().toString().trim(),
+                            Integer.parseInt(editVehicleYearEt.getText().toString().trim()),
+                            editPlateNumberEt.getText().toString().trim()
+                    );
+                }
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }

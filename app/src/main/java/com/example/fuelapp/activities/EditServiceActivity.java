@@ -1,4 +1,4 @@
-package com.example.fuelapp.Activities;
+package com.example.fuelapp.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fuelapp.Database.DatabaseHelper;
+import com.example.fuelapp.database.DatabaseHelper;
 import com.example.fuelapp.R;
 
 import java.util.Calendar;
@@ -25,11 +25,15 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
 
     public static final String COLUMN_SERVICE_ID = "service_id";
     final Calendar c = Calendar.getInstance();
-    private int mYear, mMonth, mDay;
-    private String choosenDate;
-    private EditText editServiceTitleEt, editServiceDescEt, editServiceCostEt;
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    private String chosenDate;
+    private EditText editServiceTitleEt;
+    private EditText editServiceDescEt;
+    private EditText editServiceCostEt;
     private TextView editServiceDateTv;
-    private Button editServicebtn;
+    private Button editServiceBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,7 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
         editServiceCostEt = findViewById(R.id.editServiceCostEt);
         editServiceDescEt = findViewById(R.id.editServiceDescEt);
         editServiceDateTv = findViewById(R.id.editServiceDateTv);
-        editServicebtn = findViewById(R.id.editServiceBtn);
+        editServiceBtn = findViewById(R.id.editServiceBtn);
 
         editServiceTitleEt.setText(getServicesData(1));
         editServiceDescEt.setText(getServicesData(2));
@@ -48,7 +52,7 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
         editServiceDateTv.setText(getServicesData(4));
 
         editServiceDateTv.setOnClickListener(this);
-        editServicebtn.setOnClickListener(this);
+        editServiceBtn.setOnClickListener(this);
     }
 
     @Override
@@ -70,10 +74,10 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
 
     @SuppressLint("Recycle")
     private String getServicesData(int option) {
-        SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null);
         Cursor cursor;
-        if(db != null) {
+        try(SQLiteDatabase db = this.openOrCreateDatabase("VehiclesList.db", Context.MODE_PRIVATE, null)) {
             cursor = db.rawQuery("SELECT service_id,service_title,service_desc,service_cost,service_date,serviced_vehicle_id  FROM services WHERE service_id = " + getServiceId(), null);
+
             if (cursor.getCount() == 0) {
                 Toast.makeText(getApplicationContext(), "no data", Toast.LENGTH_SHORT).show();
             }
@@ -83,14 +87,13 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
             }
             return buffer.toString();
         }
-        return null;
     }
 
     @Override
     public void onClick(View v) {
         if (v == editServiceDateTv) {
             chooseDate(editServiceDateTv);
-        } else if (v == editServicebtn) {
+        } else if (v == editServiceBtn) {
             if (editServiceTitleEt.getText().toString().trim().isEmpty()) {
                 emptyError(editServiceTitleEt);
             } else if (editServiceDescEt.getText().toString().trim().isEmpty()) {
@@ -98,14 +101,16 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
             } else if (editServiceCostEt.getText().toString().trim().isEmpty()) {
                 emptyError(editServiceCostEt);
             } else {
-                DatabaseHelper myDB = new DatabaseHelper(EditServiceActivity.this);
-                myDB.editService(
-                        getServiceId(),
-                        editServiceTitleEt.getText().toString().trim(),
-                        editServiceDescEt.getText().toString().trim(),
-                        Float.parseFloat(editServiceCostEt.getText().toString().trim()),
-                        editServiceDateTv.getText().toString().trim()
-                );
+                try(DatabaseHelper myDB = new DatabaseHelper(EditServiceActivity.this)) {
+                    myDB.editService(
+                            getServiceId(),
+                            editServiceTitleEt.getText().toString().trim(),
+                            editServiceDescEt.getText().toString().trim(),
+                            Float.parseFloat(editServiceCostEt.getText().toString().trim()),
+                            editServiceDateTv.getText().toString().trim()
+                    );
+                }
+
                 Intent intent = new Intent(getApplicationContext(), ServiceDetailsActivity.class);
                 intent.putExtra(COLUMN_SERVICE_ID, getServiceId());
                 startActivity(intent);
@@ -131,15 +136,15 @@ public class EditServiceActivity extends AppCompatActivity implements View.OnCli
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     if (dayOfMonth < 10 && monthOfYear < 9) {
-                        choosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                        chosenDate = "0" + dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
                     } else if (dayOfMonth < 10) {
-                        choosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        chosenDate = "0" + dayOfMonth + "." + (monthOfYear + 1) + "." + year;
                     } else if (monthOfYear < 9) {
-                        choosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
+                        chosenDate = dayOfMonth + ".0" + (monthOfYear + 1) + "." + year;
                     } else {
-                        choosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        chosenDate = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
                     }
-                    option.setText(choosenDate);
+                    option.setText(chosenDate);
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
